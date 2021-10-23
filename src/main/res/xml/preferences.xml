@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings">
+
+  <PreferenceCategory
+      android:key="pref_update_category"
+      android:title="@string/pref_update_category">
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:icon="?attr/pref_wifi"
+        android:key="pref_wifi"
+        android:persistent="true"
+        android:summary="@string/pref_wifi_summ"
+        android:title="@string/pref_wifi" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:icon="?attr/pref_roaming"
+        android:key="pref_roaming"
+        android:persistent="true"
+        android:summary="@string/pref_roaming_summ"
+        android:title="@string/pref_roaming" />
+
+  </PreferenceCategory>
+
+  <PreferenceCategory
+      android:key="pref_numbers_category"
+      android:title="@string/pref_numbers">
+
+    <ListPreference
+        android:defaultValue="@string/pref_digit_default"
+        android:dialogIcon="?attr/pref_digits"
+        android:dialogTitle="@string/pref_digits"
+        android:entries="@array/pref_digit_entries"
+        android:entryValues="@array/pref_digit_values"
+        android:icon="?attr/pref_digits"
+        android:key="pref_digits"
+        android:title="@string/pref_digits" />
+
+  </PreferenceCategory>
+
+  <PreferenceCategory
+      android:key="pref_theme_category"
+      android:title="@string/theme">
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:icon="?attr/pref_dark"
+        android:key="pref_dark"
+        android:persistent="true"
+        android:summary="@string/pref_dark_summ"
+        android:title="@string/pref_dark" />
+
+  </PreferenceCategory>
+
+  <PreferenceCategory
+      android:key="pref_about_category"
+      android:title="@string/pref_about">
+
+    <org.billthefarmer.currency.AboutPreference
+        android:dialogLayout="@layout/about"
+        android:dialogTitle="@string/app_name"
+        android:icon="?attr/pref_about"
+        android:key="pref_about"
+        android:negativeButtonText=""
+        android:summary="@string/pref_about_summ"
+        android:title="@string/pref_about" />
+
+  </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.2'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+    }
+
+    // tasks.withType(JavaCompile) {
+    //     options.deprecation = true
+    // }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "org.billthefarmer.specie"
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionName "1.0"
+        versionCode 1
+
+        buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        disable 'IconDensities', 'IconDuplicates', 'OldTargetApi',
+	    'NonConstantResourceId', 'ExpiredTargetSdkVersion'
+        // abortOnError false
+    }
+}
