@@ -14,12 +14,6 @@
       android:title="@string/remove" />
 
   <item
-      android:id="@+id/action_chart"
-      android:icon="@drawable/ic_action_picture"
-      android:showAsAction="ifRoom"
-      android:title="@string/chart" />
-
-  <item
       android:id="@+id/action_copy"
       android:icon="@drawable/ic_action_copy"
       android:showAsAction="ifRoom"

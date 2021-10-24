@@ -59,7 +59,7 @@
       android:key="pref_about_category"
       android:title="@string/pref_about">
 
-    <org.billthefarmer.currency.AboutPreference
+    <org.billthefarmer.specie.AboutPreference
         android:dialogLayout="@layout/about"
         android:dialogTitle="@string/app_name"
         android:icon="?attr/pref_about"

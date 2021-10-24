@@ -87,63 +87,147 @@ public class Main extends Activity
     // Specie names
     public static final String SPECIE_NAMES[] =
     {
-        "EUR", "USD", "JPY", "BGN",
-        "CZK", "DKK", "GBP", "HUF",
-        "PLN", "RON", "SEK", "CHF",
-        "NOK", "HRK", "RUB", "TRY",
-        "AUD", "BRL", "CAD", "CNY",
-        "HKD", "IDR", "ILS", "INR",
-        "ISK", "KRW", "MXN", "MYR",
-        "NZD", "PHP", "SGD", "THB",
-        "ZAR", "EXT"
+        "EUR", "USD", "GBP", "JPY", "AUD", "CHF", "CAD", "SVC", "CVE", "ZMW",
+        "YER", "LKR", "PLN", "PEN", "IQD", "STN", "XPF", "ALL", "MUR", "DOP",
+        "NZD", "HRK", "DZD", "ARS", "PYG", "BND", "KMF", "SZL", "SOS", "ANG",
+        "PKR", "KRW", "AZN", "CRC", "JMD", "SSP", "ERN", "WST", "EGP", "SGD",
+        "ZAR", "KGS", "MGA", "SRD", "GHS", "MOP", "BAM", "INR", "TRY", "TWD",
+        "TMT", "VES", "SBD", "MWK", "GTQ", "LBP", "HUF", "NGN", "IRR", "MKD",
+        "BIF", "MMK", "MVR", "SEK", "NPR", "ISK", "GIP", "GEL", "COP", "BZD",
+        "GNF", "SLL", "KES", "AED", "PHP", "ILS", "MRO", "BOB", "GYD", "RWF",
+        "MZN", "UGX", "CNY", "SAR", "MYR", "KZT", "AFN", "NAD", "SYP", "TOP",
+        "VUV", "IDR", "TND", "XOF", "TJS", "ETB", "XCD", "LAK", "BWP", "KWD",
+        "CZK", "PGK", "UAH", "GMD", "AWG", "AOA", "KHR", "NOK", "MAD", "RON",
+        "BYN", "RSD", "BSD", "DJF", "HNL", "SCR", "BHD", "OMR", "RUB", "LYD",
+        "CLP", "UYU", "FJD", "CDF", "LSL", "TZS", "BBD", "BDT", "QAR", "MXN",
+        "AMD", "NIO", "LRD", "SDG", "MRU", "MNT", "BRL", "HKD", "THB", "XAF",
+        "MDL", "PAB", "TTD", "HTG", "CUP", "DKK", "JOD", "BGN", "VND", "UZS"
     };
 
     // Specie symbols
     public static final String SPECIE_SYMBOLS[] =
     {
-        "€", "$", "¥", "лв",
-        "Kč", "kr", "£", "Ft",
-        "zł", "lei", "kr", "",
-        "kr", "kn", "₽", "₺",
-        "$", "R$", "$", "¥",
-        "$", "Rp", "₪", "₹",
-        "kr", "₩", "$", "RM",
-        "$", "₱", "$", "฿",
-        "S", ""
+        "€", "$", "£", "¥", "$", "", "$", "$", "", "", "﷼", "₨", "zł", "S/.",
+        "", "", "", "Lek", "₨", "RD$", "$", "kn", "", "$", "Gs", "$", "", "",
+        "S", "ƒ", "₨", "₩", "₼", "₡", "J$", "", "", "", "£", "$", "R", "лв",
+        "", "$", "", "", "KM", "₹", "", "NT$", "", "", "$", "", "Q", "£",
+        "Ft", "₦", "﷼", "ден", "", "", "", "kr", "₨", "kr", "£", "₾", "$",
+        "BZ$", "", "", "", "", "₱", "₪", "", "$b", "$", "", "MT", "", "¥",
+        "﷼", "RM", "лв", "؋", "$", "£", "", "", "Rp", "", "", "", "", "", "₭",
+        "P", "", "Kč", "", "₴", "", "ƒ", "", "៛", "kr", "", "lei", "", "Дин.",
+        "$", "", "L", "₨", "", "﷼", "₽", "", "$", "$U", "$", "", "", "", "$",
+        "", "﷼", "$", "", "C$", "$", "", "", "₮", "R$", "$", "฿", "", "",
+        "B/.", "TT$", "", "₱", "kr", "", "лв", "₫", "лв",
     };
 
     // Specie long names
     public static final Integer SPECIE_LONGNAMES[] =
     {
-        R.string.long_eur, R.string.long_usd, R.string.long_jpy,
-        R.string.long_bgn, R.string.long_czk, R.string.long_dkk,
-        R.string.long_gbp, R.string.long_huf, R.string.long_pln,
-        R.string.long_ron, R.string.long_sek, R.string.long_chf,
-        R.string.long_nok, R.string.long_hrk, R.string.long_rub,
-        R.string.long_try, R.string.long_aud, R.string.long_brl,
-        R.string.long_cad, R.string.long_cny, R.string.long_hkd,
-        R.string.long_idr, R.string.long_ils, R.string.long_inr,
-        R.string.long_isk, R.string.long_krw, R.string.long_mxn,
-        R.string.long_myr, R.string.long_nzd, R.string.long_php,
-        R.string.long_sgd, R.string.long_thb, R.string.long_zar,
-        R.string.long_ext
+        R.string.long_eur, R.string.long_usd, R.string.long_gbp,
+        R.string.long_jpy, R.string.long_aud, R.string.long_chf,
+        R.string.long_cad, R.string.long_svc, R.string.long_cve,
+        R.string.long_zmw, R.string.long_yer, R.string.long_lkr,
+        R.string.long_pln, R.string.long_pen, R.string.long_iqd,
+        R.string.long_stn, R.string.long_xpf, R.string.long_all,
+        R.string.long_mur, R.string.long_dop, R.string.long_nzd,
+        R.string.long_hrk, R.string.long_dzd, R.string.long_ars,
+        R.string.long_pyg, R.string.long_bnd, R.string.long_kmf,
+        R.string.long_szl, R.string.long_sos, R.string.long_ang,
+        R.string.long_pkr, R.string.long_krw, R.string.long_azn,
+        R.string.long_crc, R.string.long_jmd, R.string.long_ssp,
+        R.string.long_ern, R.string.long_wst, R.string.long_egp,
+        R.string.long_sgd, R.string.long_zar, R.string.long_kgs,
+        R.string.long_mga, R.string.long_srd, R.string.long_ghs,
+        R.string.long_mop, R.string.long_bam, R.string.long_inr,
+        R.string.long_try, R.string.long_twd, R.string.long_tmt,
+        R.string.long_ves, R.string.long_sbd, R.string.long_mwk,
+        R.string.long_gtq, R.string.long_lbp, R.string.long_huf,
+        R.string.long_ngn, R.string.long_irr, R.string.long_mkd,
+        R.string.long_bif, R.string.long_mmk, R.string.long_mvr,
+        R.string.long_sek, R.string.long_npr, R.string.long_isk,
+        R.string.long_gip, R.string.long_gel, R.string.long_cop,
+        R.string.long_bzd, R.string.long_gnf, R.string.long_sll,
+        R.string.long_kes, R.string.long_aed, R.string.long_php,
+        R.string.long_ils, R.string.long_mro, R.string.long_bob,
+        R.string.long_gyd, R.string.long_rwf, R.string.long_mzn,
+        R.string.long_ugx, R.string.long_cny, R.string.long_sar,
+        R.string.long_myr, R.string.long_kzt, R.string.long_afn,
+        R.string.long_nad, R.string.long_syp, R.string.long_top,
+        R.string.long_vuv, R.string.long_idr, R.string.long_tnd,
+        R.string.long_xof, R.string.long_tjs, R.string.long_etb,
+        R.string.long_xcd, R.string.long_lak, R.string.long_bwp,
+        R.string.long_kwd, R.string.long_czk, R.string.long_pgk,
+        R.string.long_uah, R.string.long_gmd, R.string.long_awg,
+        R.string.long_aoa, R.string.long_khr, R.string.long_nok,
+        R.string.long_mad, R.string.long_ron, R.string.long_byn,
+        R.string.long_rsd, R.string.long_bsd, R.string.long_djf,
+        R.string.long_hnl, R.string.long_scr, R.string.long_bhd,
+        R.string.long_omr, R.string.long_rub, R.string.long_lyd,
+        R.string.long_clp, R.string.long_uyu, R.string.long_fjd,
+        R.string.long_cdf, R.string.long_lsl, R.string.long_tzs,
+        R.string.long_bbd, R.string.long_bdt, R.string.long_qar,
+        R.string.long_mxn, R.string.long_amd, R.string.long_nio,
+        R.string.long_lrd, R.string.long_sdg, R.string.long_mru,
+        R.string.long_mnt, R.string.long_brl, R.string.long_hkd,
+        R.string.long_thb, R.string.long_xaf, R.string.long_mdl,
+        R.string.long_pab, R.string.long_ttd, R.string.long_htg,
+        R.string.long_cup, R.string.long_dkk, R.string.long_jod,
+        R.string.long_bgn, R.string.long_vnd, R.string.long_uzs
     };
 
     // Specie flags
     public static final Integer SPECIE_FLAGS[] =
     {
-        R.drawable.flag_eur, R.drawable.flag_usd, R.drawable.flag_jpy,
-        R.drawable.flag_bgn, R.drawable.flag_czk, R.drawable.flag_dkk,
-        R.drawable.flag_gbp, R.drawable.flag_huf, R.drawable.flag_pln,
-        R.drawable.flag_ron, R.drawable.flag_sek, R.drawable.flag_chf,
-        R.drawable.flag_nok, R.drawable.flag_hrk, R.drawable.flag_rub,
-        R.drawable.flag_try, R.drawable.flag_aud, R.drawable.flag_brl,
-        R.drawable.flag_cad, R.drawable.flag_cny, R.drawable.flag_hkd,
-        R.drawable.flag_idr, R.drawable.flag_ils, R.drawable.flag_inr,
-        R.drawable.flag_isk, R.drawable.flag_kpw, R.drawable.flag_mxn,
-        R.drawable.flag_myr, R.drawable.flag_nzd, R.drawable.flag_php,
-        R.drawable.flag_sgd, R.drawable.flag_thb, R.drawable.flag_zar,
-        R.drawable.flag_ext
+        R.drawable.flag_eu, R.drawable.flag_us, R.drawable.flag_gb,
+        R.drawable.flag_jp, R.drawable.flag_au, R.drawable.flag_ch,
+        R.drawable.flag_ca, R.drawable.flag_sv, R.drawable.flag_cv,
+        R.drawable.flag_zm, R.drawable.flag_ye, R.drawable.flag_lk,
+        R.drawable.flag_pl, R.drawable.flag_pe, R.drawable.flag_iq,
+        R.drawable.flag_st, R.drawable.flag_xp, R.drawable.flag_al,
+        R.drawable.flag_mu, R.drawable.flag_do, R.drawable.flag_nz,
+        R.drawable.flag_hr, R.drawable.flag_dz, R.drawable.flag_ar,
+        R.drawable.flag_py, R.drawable.flag_bn, R.drawable.flag_km,
+        R.drawable.flag_sz, R.drawable.flag_so, R.drawable.flag_an,
+        R.drawable.flag_pk, R.drawable.flag_kr, R.drawable.flag_az,
+        R.drawable.flag_cr, R.drawable.flag_jm, R.drawable.flag_ss,
+        R.drawable.flag_er, R.drawable.flag_ws, R.drawable.flag_eg,
+        R.drawable.flag_sg, R.drawable.flag_za, R.drawable.flag_kg,
+        R.drawable.flag_mg, R.drawable.flag_sr, R.drawable.flag_gh,
+        R.drawable.flag_mo, R.drawable.flag_ba, R.drawable.flag_in,
+        R.drawable.flag_tr, R.drawable.flag_tw, R.drawable.flag_tm,
+        R.drawable.flag_ve, R.drawable.flag_sb, R.drawable.flag_mw,
+        R.drawable.flag_gt, R.drawable.flag_lb, R.drawable.flag_hu,
+        R.drawable.flag_ng, R.drawable.flag_ir, R.drawable.flag_mk,
+        R.drawable.flag_bi, R.drawable.flag_mm, R.drawable.flag_mv,
+        R.drawable.flag_se, R.drawable.flag_np, R.drawable.flag_is,
+        R.drawable.flag_gi, R.drawable.flag_ge, R.drawable.flag_co,
+        R.drawable.flag_bz, R.drawable.flag_gn, R.drawable.flag_sl,
+        R.drawable.flag_ke, R.drawable.flag_ae, R.drawable.flag_ph,
+        R.drawable.flag_il, R.drawable.flag_mr, R.drawable.flag_bo,
+        R.drawable.flag_gy, R.drawable.flag_rw, R.drawable.flag_mz,
+        R.drawable.flag_ug, R.drawable.flag_cn, R.drawable.flag_sa,
+        R.drawable.flag_my, R.drawable.flag_kz, R.drawable.flag_af,
+        R.drawable.flag_na, R.drawable.flag_sy, R.drawable.flag_to,
+        R.drawable.flag_vu, R.drawable.flag_id, R.drawable.flag_tn,
+        R.drawable.flag_xo, R.drawable.flag_tj, R.drawable.flag_et,
+        R.drawable.flag_xc, R.drawable.flag_la, R.drawable.flag_bw,
+        R.drawable.flag_kw, R.drawable.flag_cz, R.drawable.flag_pg,
+        R.drawable.flag_ua, R.drawable.flag_gm, R.drawable.flag_aw,
+        R.drawable.flag_ao, R.drawable.flag_kh, R.drawable.flag_no,
+        R.drawable.flag_ma, R.drawable.flag_ro, R.drawable.flag_by,
+        R.drawable.flag_rs, R.drawable.flag_bs, R.drawable.flag_dj,
+        R.drawable.flag_hn, R.drawable.flag_sc, R.drawable.flag_bh,
+        R.drawable.flag_om, R.drawable.flag_ru, R.drawable.flag_ly,
+        R.drawable.flag_cl, R.drawable.flag_uy, R.drawable.flag_fj,
+        R.drawable.flag_cd, R.drawable.flag_ls, R.drawable.flag_tz,
+        R.drawable.flag_bb, R.drawable.flag_bd, R.drawable.flag_qa,
+        R.drawable.flag_mx, R.drawable.flag_am, R.drawable.flag_ni,
+        R.drawable.flag_lr, R.drawable.flag_sd, R.drawable.flag_mr,
+        R.drawable.flag_mn, R.drawable.flag_br, R.drawable.flag_hk,
+        R.drawable.flag_th, R.drawable.flag_xa, R.drawable.flag_md,
+        R.drawable.flag_pa, R.drawable.flag_tt, R.drawable.flag_ht,
+        R.drawable.flag_cu, R.drawable.flag_dk, R.drawable.flag_jo,
+        R.drawable.flag_bg, R.drawable.flag_vn, R.drawable.flag_uz
     };
 
     public static final String TAG = "Specie";
@@ -156,7 +240,6 @@ public class Main extends Activity
     public static final String PREF_INDEX = "pref_index";
     public static final String PREF_VALUE = "pref_value";
     public static final String PREF_VALUES = "pref_values";
-    public static final String PREF_EXTRA = "pref_extra";
 
     public static final String PREF_WIFI = "pref_wifi";
     public static final String PREF_ROAMING = "pref_roaming";
@@ -165,7 +248,6 @@ public class Main extends Activity
     public static final String PREF_DARK = "pref_dark";
     public static final String PREF_ABOUT = "pref_about";
 
-    public static final String CHART_LIST = "chart_list";
     public static final String SAVE_SELECT = "save_select";
 
     public static final String ECB_DAILY_URL =
@@ -187,7 +269,6 @@ public class Main extends Activity
     private int currentIndex = 0;
     private double currentValue = 1.0;
     private double convertValue = 1.0;
-    private double extraValue = 1.0;
     private String date;
 
     private ImageView flagView;
@@ -351,19 +432,6 @@ public class Main extends Activity
             currentValue = 1.0;
         }
 
-        // Get extra value
-        String extra = preferences.getString(PREF_EXTRA, "1.0");
-
-        // Parse extra value
-        try
-        {
-            extraValue = Double.parseDouble(extra);
-        }
-        catch (Exception ex)
-        {
-            extraValue = 1.0;
-        }
-
         // Get the date and format it for display
         date = preferences.getString(PREF_DATE, "");
         String format = resources.getString(R.string.updated);
@@ -433,7 +501,7 @@ public class Main extends Activity
                 Parser parser = new Parser();
 
                 // Start the parser
-                parser.startParser(this, R.raw.eurofxref_daily);
+                parser.startParser(this, R.raw.euro);
 
                 SimpleDateFormat dateParser =
                     new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
@@ -466,7 +534,6 @@ public class Main extends Activity
 
                 valueMap = parser.getMap();
                 valueMap.put("EUR", 1.0);
-                valueMap.put("EXT", extraValue);
             }
         }
 
@@ -521,7 +588,7 @@ public class Main extends Activity
             for (String name : nameList)
             {
                 Double v = valueMap.get(name);
-                value = numberFormat.format(v);
+                value = numberFormat.format((v != null)? v: 0.0);
 
                 valueList.add(value);
             }
@@ -535,7 +602,7 @@ public class Main extends Activity
         for (String name : nameList)
         {
             Double v = (currentValue / convertValue) *
-                       valueMap.get(name);
+                ((valueMap.get(name) != null)? valueMap.get(name): 0.0);
 
             String s = numberFormat.format(v);
             valueList.add(s);
@@ -572,7 +639,6 @@ public class Main extends Activity
             if (data.getMap() != null)
             {
                 valueMap.put("EUR", 1.0);
-                valueMap.put("EXT", extraValue);
 
                 // Don't update
                 return;
@@ -644,8 +710,6 @@ public class Main extends Activity
 
         String value = Double.toString(currentValue);
         editor.putString(PREF_VALUE, value);
-        String extra = Double.toString(extraValue);
-        editor.putString(PREF_EXTRA, extra);
         editor.putString(PREF_DATE, date);
         editor.apply();
 
@@ -699,10 +763,6 @@ public class Main extends Activity
         case R.id.action_refresh:
             return onRefreshClick();
 
-        // Update
-        case R.id.action_update:
-            return onUpdateClick();
-
         // Help
         case R.id.action_help:
             return onHelpClick();
@@ -718,10 +778,6 @@ public class Main extends Activity
         // Remove
         case R.id.action_remove:
             return onRemoveClick();
-
-        // Chart
-        case R.id.action_chart:
-            return onChartClick();
 
         // Copy
         case R.id.action_copy:
@@ -829,40 +885,6 @@ public class Main extends Activity
         return true;
     }
 
-    // On chart click
-    private boolean onChartClick()
-    {
-        Intent intent = new Intent(this, ChartActivity.class);
-        List<Integer> list = new ArrayList<>();
-
-        // Add the current index
-        list.add(currentIndex);
-
-        // Add the select list to the list
-        for (int index : selectList)
-        {
-            String name = nameList.get(index);
-            list.add(specieNameList.indexOf(name));
-        }
-
-        // Put the list
-        intent.putIntegerArrayListExtra(CHART_LIST,
-                                        (ArrayList<Integer>) list);
-
-        // Start chart activity
-        startActivity(intent);
-
-        // Clear select list and update adapter
-        selectList.clear();
-        adapter.notifyDataSetChanged();
-
-        // Restore menu
-        mode = DISPLAY_MODE;
-        invalidateOptionsMenu();
-
-        return true;
-    }
-
     // On refresh click
     @SuppressWarnings("deprecation")
     private boolean onRefreshClick()
@@ -905,87 +927,6 @@ public class Main extends Activity
             data.startParseTask(ECB_DAILY_URL);
 
         return true;
-    }
-
-    // On update click
-    private boolean onUpdateClick()
-    {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setMinimumFractionDigits(digits);
-        numberFormat.setMaximumFractionDigits(digits);
-
-        NumberFormat englishFormat = NumberFormat.getInstance(Locale.ENGLISH);
-
-        String extra = numberFormat.format(extraValue);
-
-        // Open dialog
-        updateDialog(R.string.update_extra, extra, R.string.decimal,
-                    (dialog, id) ->
-        {
-            switch (id)
-            {
-            case DialogInterface.BUTTON_POSITIVE:
-                EditText text =
-                    ((Dialog) dialog).findViewById(R.id.value);
-                String value = text.getText().toString();
-
-                // Ignore empty string
-                if (value.isEmpty())
-                    return;
-
-                // Try default locale
-                try
-                {
-                    Number number = numberFormat.parse(value);
-                    extraValue = number.doubleValue();
-                }
-                catch (Exception e)
-                {
-                    // Try English locale
-                    try
-                    {
-                        Number number = englishFormat.parse(value);
-                        extraValue = number.doubleValue();
-                    }
-                    catch (Exception ex)
-                    {
-                        extraValue = 1.0;
-                    }
-                }
-
-                // Update display
-                valueMap.put("EXT", extraValue);
-                convertValue = valueMap.get(SPECIE_NAMES[currentIndex]);
-                Editable editable = editView.getEditableText();
-                afterTextChanged(editable);
-            }
-        });
-
-        return true;
-    }
-
-    // updateDialog
-    private void updateDialog(int title, String value, int hint,
-                              DialogInterface.OnClickListener listener)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title);
-
-        // Add the buttons
-        builder.setPositiveButton(R.string.ok, listener);
-        builder.setNegativeButton(R.string.cancel, listener);
-
-        // Create edit text
-        Context context = builder.getContext();
-        LayoutInflater inflater = (LayoutInflater)
-            context.getSystemService(LAYOUT_INFLATER_SERVICE);
-        EditText text = (EditText) inflater.inflate(R.layout.value, null);
-        text.setText(value);
-
-        // Create the AlertDialog
-        AlertDialog dialog = builder.create();
-        dialog.setView(text, 40, 0, 40, 0);
-        dialog.show();
     }
 
     // On help click
@@ -1078,7 +1019,7 @@ public class Main extends Activity
         for (String name : nameList)
         {
             Double value = (currentValue / convertValue) *
-                           valueMap.get(name);
+                ((valueMap.get(name) != null)? valueMap.get(name): 0.0);
 
             String s = numberFormat.format(value);
             valueList.add(s);
@@ -1404,7 +1345,6 @@ public class Main extends Activity
         {
             valueMap = map;
             valueMap.put("EUR", 1.0);
-            valueMap.put("EXT", extraValue);
 
             // Empty the value list
             valueList.clear();
@@ -1421,7 +1361,7 @@ public class Main extends Activity
                 int index = specieNameList.indexOf(name);
 
                 Double value = (currentValue / convertValue) *
-                               valueMap.get(name);
+                    ((valueMap.get(name) != null)? valueMap.get(name): 0.0);
 
                 String s = numberFormat.format(value);
 
