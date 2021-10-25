@@ -250,8 +250,8 @@ public class Main extends Activity
 
     public static final String SAVE_SELECT = "save_select";
 
-    public static final String ECB_DAILY_URL =
-        "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
+    public static final String DAILY_URL =
+        "https://www.floatrates.com/daily/eur.json";
 
     protected final static String CHOICE = "choice";
 
@@ -680,7 +680,7 @@ public class Main extends Activity
 
         // Start the task
         if (data != null)
-            data.startParseTask(ECB_DAILY_URL);
+            data.startParseTask(DAILY_URL);
     }
 
     // On pause
@@ -924,7 +924,7 @@ public class Main extends Activity
 
         // Start the task
         if (data != null)
-            data.startParseTask(ECB_DAILY_URL);
+            data.startParseTask(DAILY_URL);
 
         return true;
     }

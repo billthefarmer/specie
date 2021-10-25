@@ -24,20 +24,24 @@
 package org.billthefarmer.specie;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.util.Xml;
+import android.util.Log;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.helpers.DefaultHandler;
-
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import java.net.URL;
+
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+
+import org.json.JSONObject;
 
 // Parser class
 public class Parser
 {
+    private static final String TAG = "Parser";
     private Map<String, Double> map;
     private String date;
 
@@ -54,22 +58,39 @@ public class Parser
     }
 
     // Start parser for a url
-    public boolean startParser(String s)
+    public boolean startParser(String source)
     {
         // Create the map
         map = new HashMap<>();
 
-        // Read the xml from the url
+        // Read the json from the url
         try
         {
-            URL url = new URL(s);
-            InputStream stream = url.openStream();
-            Handler handler = new Handler();
-            Xml.parse(stream, Xml.Encoding.UTF_8, handler);
+            URL url = new URL(source);
+            String json = read(url).toString();
+
+            JSONObject entries = new JSONObject(json);
+
+            // Use an iterator for the JSON object
+            Iterator<String> keys = entries.keys();
+            while (keys.hasNext())
+            {
+                String key = keys.next();
+                JSONObject entry = entries.getJSONObject(key);
+                String code = entry.getString("code");
+                Double rate = entry.getDouble("rate");
+                date = entry.getString("date");
+
+                map.put(code, rate);
+            }
+
             return true;
         }
+
         catch (Exception e)
         {
+            Log.e(TAG, "Error: " + e.getMessage());
+            e.printStackTrace();
             map.clear();
         }
 
@@ -82,68 +103,73 @@ public class Parser
         // Create the map
         map = new HashMap<>();
 
-        Resources resources = context.getResources();
-
-        // Read the xml from the resources
+        // Read the json from the resources
         try
         {
-            InputStream stream = resources.openRawResource(id);
-            Handler handler = new Handler();
-            Xml.parse(stream, Xml.Encoding.UTF_8, handler);
+            String json = read(context, id).toString();
+
+            JSONObject entries = new JSONObject(json);
+
+            // Use an iterator for the JSON object
+            Iterator<String> keys = entries.keys();
+            while (keys.hasNext())
+            {
+                String key = keys.next();
+                JSONObject entry = entries.getJSONObject(key);
+                String code = entry.getString("code");
+                Double rate = entry.getDouble("rate");
+                date = entry.getString("date");
+
+                map.put(code, rate);
+            }
+
             return true;
         }
+
         catch (Exception e)
         {
+            Log.d(TAG, "Error: " + e.getMessage());
+            e.printStackTrace();
             map.clear();
         }
 
         return false;
     }
 
-    // Handler class
-    private class Handler extends DefaultHandler
+    // read
+    public static CharSequence read(URL url)
     {
-        // Start element
-        @Override
-        public void startElement(String uri, String localName, String qName,
-                                 Attributes attributes)
+        StringBuilder text = new StringBuilder();
+
+        try (BufferedReader buffer = new
+             BufferedReader(new InputStreamReader(url.openStream())))
         {
-            String name = "EUR";
-            double rate;
-
-            if (localName.equals("Cube"))
-            {
-                for (int i = 0; i < attributes.getLength(); i++)
-                {
-                    // Get the date
-                    switch (attributes.getLocalName(i))
-                    {
-                    case "time":
-                        date = attributes.getValue(i);
-                        break;
-
-                    // Get the specie name
-                    case "specie":
-                        name = attributes.getValue(i);
-                        break;
-
-                    // Get the specie rate
-                    case "rate":
-                        try
-                        {
-                            rate = Double.parseDouble(attributes.getValue(i));
-                        }
-                        catch (Exception e)
-                        {
-                            rate = 1.0;
-                        }
-
-                        // Add new specie to the map
-                        map.put(name, rate);
-                        break;
-                    }
-                }
-            }
+            String line;
+            while ((line = buffer.readLine()) != null)
+                text.append(line).append(System.getProperty("line.separator"));
         }
+
+        catch (Exception e) {}
+
+        return text;
+    }
+
+    // read
+    public static CharSequence read(Context context, int resId)
+    {
+        StringBuilder text = new StringBuilder();
+
+        try (BufferedReader buffer = new BufferedReader
+             (new InputStreamReader
+              (context.getResources().openRawResource(resId))))
+        {
+            String line;
+            while ((line = buffer.readLine()) != null)
+                text.append(line).append(System.getProperty("line.separator"));
+        }
+
+        catch (Exception e) {}
+
+        return text;
     }
 }
