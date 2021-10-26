@@ -1,4 +1,4 @@
-# ![Logo](src/main/res/drawable-hdpi/ic_launcher.png) Specie [![.github/workflows/main.yml](https://github.com/billthefarmer/currency/workflows/.github/workflows/main.yml/badge.svg)](https://github.com/billthefarmer/specie/actions) [![Release](https://img.shields.io/github/release/billthefarmer/specie.svg?logo=github)](https://github.com/billthefarmer/specie/releases)
+# ![Logo](src/main/res/drawable-hdpi/ic_launcher.png) Specie [![.github/workflows/main.yml](https://github.com/billthefarmer/specie/workflows/.github/workflows/main.yml/badge.svg)](https://github.com/billthefarmer/specie/actions) [![Release](https://img.shields.io/github/release/billthefarmer/specie.svg?logo=github)](https://github.com/billthefarmer/specie/releases)
 
 Android currency conversion. The app is available [here](https://github.com/billthefarmer/specie/releases). This app is called Specie because I already have an app called [Currency](https://github.com/billthefarmer/currency).
 
