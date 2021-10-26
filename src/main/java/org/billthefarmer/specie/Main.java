@@ -503,8 +503,9 @@ public class Main extends Activity
                 // Start the parser
                 parser.startParser(this, R.raw.euro);
 
-                SimpleDateFormat dateParser =
-                    new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
+                DateFormat dateParser =
+                    DateFormat.getDateInstance(DateFormat.FULL);
+                    // new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
                 DateFormat dateFormat =
                     DateFormat.getDateInstance(DateFormat.MEDIUM);
 
@@ -1308,8 +1309,9 @@ public class Main extends Activity
     @Override
     public void onProgressUpdate(String... date)
     {
-        SimpleDateFormat dateParser =
-            new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
+        DateFormat dateParser =
+            DateFormat.getDateInstance(DateFormat.FULL);
+            // new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         DateFormat dateFormat =
             DateFormat.getDateInstance(DateFormat.MEDIUM);
 
