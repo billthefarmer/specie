@@ -60,7 +60,6 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -505,7 +504,6 @@ public class Main extends Activity
 
                 DateFormat dateParser =
                     DateFormat.getDateInstance(DateFormat.FULL);
-                    // new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
                 DateFormat dateFormat =
                     DateFormat.getDateInstance(DateFormat.MEDIUM);
 
@@ -1311,7 +1309,6 @@ public class Main extends Activity
     {
         DateFormat dateParser =
             DateFormat.getDateInstance(DateFormat.FULL);
-            // new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         DateFormat dateFormat =
             DateFormat.getDateInstance(DateFormat.MEDIUM);
 
