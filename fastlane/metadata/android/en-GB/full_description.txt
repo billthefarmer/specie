@@ -1,0 +1,6 @@
+Simple currency conversion.
+
+ * Currency rates from Floatrates
+ * 150 international currencies
+ * Currency rates updated daily
+ * Last rate update retained for use offline
