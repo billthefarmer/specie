@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Specie</title>
+    <link>https://billthefarmer.github.io/specie/</link>
+    <description>Recent content on Specie</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>Copyright &amp;copy; 2021 Bill Farmer</copyright>
+    <lastBuildDate>Wed, 04 Mar 2020 11:00:12 +0000</lastBuildDate><atom:link href="https://billthefarmer.github.io/specie/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Features</title>
+      <link>https://billthefarmer.github.io/specie/introduction/features/</link>
+      <pubDate>Wed, 04 Mar 2020 10:11:56 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/specie/introduction/features/</guid>
+      <description> Currency rates from Floatrates 150 international currencies Currency rates updated daily Last rate update retained for use offline  </description>
+    </item>
+    
+    <item>
+      <title>Edit</title>
+      <link>https://billthefarmer.github.io/specie/using/edit/</link>
+      <pubDate>Wed, 04 Mar 2020 10:20:13 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/specie/using/edit/</guid>
+      <description>Touch the current currency value field to edit the value. The display will be updated dynamically as you type. Touch the Done button on the numeric keypad to update the value field. The whole value field is selected by default when touched so it will be overwritten by typing in a new value. To deselect the text, touch an adjacent area, like the currency flag.</description>
+    </item>
+    
+    <item>
+      <title>Toolbar</title>
+      <link>https://billthefarmer.github.io/specie/using/toolbar/</link>
+      <pubDate>Wed, 04 Mar 2020 10:20:43 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/specie/using/toolbar/</guid>
+      <description>The icons in the toolbar are:
+ Add a currency to the list. A scrollable list of currencies will pop up. Touch an entry to add it or touch the Cancel button below the list. Long touch an entry to select it. Once one currency is selected others may be added or removed from the selection by touching them. Another long touch on another currency will clear the list and select the new currency.</description>
+    </item>
+    
+    <item>
+      <title>Edit Currency List</title>
+      <link>https://billthefarmer.github.io/specie/using/edit-list/</link>
+      <pubDate>Wed, 04 Mar 2020 10:29:26 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/specie/using/edit-list/</guid>
+      <description>Touch a currency entry in the list to make it current. The old current currency will move to the top of the list. Long touch a currency entry to select it. Once one currency is selected others may be added or removed from the selection by touching them. Another long touch on another currency will clear the list and select the new currency. The icons in the toolbar will change to:</description>
+    </item>
+    
+    <item>
+      <title>Settings</title>
+      <link>https://billthefarmer.github.io/specie/settings/settings/</link>
+      <pubDate>Wed, 04 Mar 2020 11:00:12 +0000</pubDate>
+      
+      <guid>https://billthefarmer.github.io/specie/settings/settings/</guid>
+      <description>Update  WiFi Update while connected on WiFi only Roaming Update while roaming  Numbers  Fraction digits Select the number of digits to display after the decimal point. A popup list of options will be displayed.  Theme  Dark Use dark theme  About  About Display the version, copyright and licence.  </description>
+    </item>
+    
+  </channel>
+</rss>
