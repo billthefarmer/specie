@@ -1,4 +1,5 @@
-# ![Logo](src/main/res/drawable-hdpi/ic_launcher.png) Specie [![.github/workflows/build.yml](https://github.com/billthefarmer/specie/workflows/.github/workflows/build.yml/badge.svg)](https://github.com/billthefarmer/specie/actions) [![Release](https://img.shields.io/github/release/billthefarmer/specie.svg?logo=github)](https://github.com/billthefarmer/specie/releases) [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.svg" alt="Get it on F-Droid" width="128">](https://f-droid.org/packages/org.billthefarmer.specie)
+# ![Logo](src/main/res/drawable-hdpi/ic_launcher.png) Specie [![.github/workflows/build.yml](https://github.com/billthefarmer/specie/workflows/.github/workflows/build.yml/badge.svg)](https://github.com/billthefarmer/specie/actions) [![Release](https://img.shields.io/github/release/billthefarmer/specie.svg?logo=github)](https://github.com/billthefarmer/specie/releases)
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.svg" alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/org.billthefarmer.specie)
 
 Android currency conversion. The app is available on [F-Droid](https://f-droid.org/packages/org.billthefarmer.specie) and [here](https://github.com/billthefarmer/specie/releases). This app is called Specie because I already have an app called [Currency](https://github.com/billthefarmer/currency).
 
