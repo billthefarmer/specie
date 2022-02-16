@@ -242,6 +242,7 @@ public class Main extends Activity
 
     public static final String PREF_WIFI = "pref_wifi";
     public static final String PREF_ROAMING = "pref_roaming";
+    public static final String PREF_WIDGET = "pref_widget";
     public static final String PREF_DIGITS = "pref_digits";
     public static final String PREF_FILL = "pref_fill";
     public static final String PREF_DARK = "pref_dark";
