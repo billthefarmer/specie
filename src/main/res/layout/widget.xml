@@ -7,17 +7,43 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-  <TextView
+  <LinearLayout
       android:id="@+id/header"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:paddingLeft="8dp"
-      android:paddingRight="8dp"
-      android:paddingTop="4dp"
-      android:paddingBottom="4dp"
-      android:text="@string/app_name"
-      android:textColor="@android:color/white"
-      android:background="@drawable/header_background" />
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:background="@drawable/header_background"
+      tools:ignore="RtlHardcoded">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/current_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/current_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/current_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white" />
+
+  </LinearLayout>
 
   <LinearLayout
       android:id="@+id/item"
