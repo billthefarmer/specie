@@ -36,7 +36,7 @@
         android:entries="@array/pref_widget_entries"
         android:entryValues="@array/pref_widget_values"
         android:icon="?attr/pref_widget"
-        android:key="pref_widget"
+        android:key="pref_entry"
         android:title="@string/pref_entry" />
 
   </PreferenceCategory>

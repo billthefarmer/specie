@@ -26,8 +26,11 @@ package org.billthefarmer.specie;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,6 +56,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -242,7 +246,7 @@ public class Main extends Activity
 
     public static final String PREF_WIFI = "pref_wifi";
     public static final String PREF_ROAMING = "pref_roaming";
-    public static final String PREF_WIDGET = "pref_widget";
+    public static final String PREF_ENTRY = "pref_entry";
     public static final String PREF_DIGITS = "pref_digits";
     public static final String PREF_FILL = "pref_fill";
     public static final String PREF_DARK = "pref_dark";
@@ -267,6 +271,7 @@ public class Main extends Activity
     private int digits = 3;
 
     private int currentIndex = 0;
+    private int widgetEntry = 0;
     private double currentValue = 1.0;
     private double convertValue = 1.0;
     private String date;
@@ -414,6 +419,10 @@ public class Main extends Activity
 
         // Get current specie
         currentIndex = preferences.getInt(PREF_INDEX, 0);
+
+        // Get widget entry
+        int widgetEntry = Integer.parseInt
+            (preferences.getString(Main.PREF_ENTRY, "0"));
 
         // Get current value
         NumberFormat numberFormat = NumberFormat.getInstance();
@@ -722,6 +731,9 @@ public class Main extends Activity
             data.setMap(valueMap);
         }
 
+        // Update widgets
+        updateWidgets();
+
         // Disconnect callbacks
         data = Data.getInstance(null);
     }
@@ -787,6 +799,34 @@ public class Main extends Activity
         }
 
         return false;
+    }
+
+    // updateWidgets
+    private void updateWidgets()
+    {
+        String entryName = nameList.get(widgetEntry);
+        String entryValue = valueList.get(widgetEntry);
+        int entryIndex = specieNameList.indexOf(entryName);
+        String longName = getString(SPECIE_LONGNAMES[entryIndex]);
+
+        // Get the layout for the widget
+        RemoteViews views = new
+            RemoteViews(getPackageName(), R.layout.widget);
+
+        views.setImageViewResource(R.id.flag, SPECIE_FLAGS[entryIndex]);
+        views.setTextViewText(R.id.name, entryName);
+        views.setTextViewText(R.id.symbol, SPECIE_SYMBOLS[entryIndex]);
+        views.setTextViewText(R.id.value, entryValue);
+        views.setTextViewText(R.id.long_name, longName);
+
+        // Get manager
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        ComponentName provider = new
+            ComponentName(this, SpecieWidgetProvider.class);
+
+        // Tell the AppWidgetManager to perform an update on the
+        // current app widgets.
+        appWidgetManager.updateAppWidget(provider, views);
     }
 
     // On add click

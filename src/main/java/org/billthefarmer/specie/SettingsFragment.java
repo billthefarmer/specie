@@ -51,7 +51,12 @@ public class SettingsFragment extends android.preference.PreferenceFragment
             PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         ListPreference preference =
-            (ListPreference) findPreference(Main.PREF_DIGITS);
+            (ListPreference) findPreference(Main.PREF_ENTRY);
+
+        // Set summary to be the user-description for the selected value
+        preference.setSummary(preference.getEntry());
+
+        preference = (ListPreference) findPreference(Main.PREF_DIGITS);
 
         // Set summary to be the user-description for the selected value
         preference.setSummary(preference.getEntry());
@@ -107,6 +112,14 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     public void onSharedPreferenceChanged(SharedPreferences preferences,
                                           String key)
     {
+        if (key.equals(Main.PREF_ENTRY))
+        {
+            ListPreference preference = (ListPreference) findPreference(key);
+
+            // Set summary to be the user-description for the selected value
+            preference.setSummary(preference.getEntry());
+        }
+
         if (key.equals(Main.PREF_DIGITS))
         {
             ListPreference preference = (ListPreference) findPreference(key);

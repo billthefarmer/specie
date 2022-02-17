@@ -41,6 +41,7 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Date;
 import java.util.HashMap;
@@ -68,33 +69,15 @@ public class SpecieWidgetProvider extends AppWidgetProvider
 
         // Get digits
         int digits = Integer.parseInt
-            (preferences.getString(Main.PREF_WIDGET, "1"));
+            (preferences.getString(Main.PREF_DIGITS, "3"));
 
-        // Get current specie
-        int currentIndex = preferences.getInt(Main.PREF_INDEX, 0);
-
-        // Get current value
+        // Set digits
         NumberFormat numberFormat = NumberFormat.getInstance();
         numberFormat.setMinimumFractionDigits(digits);
         numberFormat.setMaximumFractionDigits(digits);
 
-        String value = preferences.getString(Main.PREF_VALUE, "1.0");
-        double currentValue = 1.0;
-
-        // Parse string value
-        try
-        {
-            currentValue = Double.parseDouble(value);
-        }
-
-        catch (Exception ex)
-        {
-            currentValue = 1.0;
-        }
-
         // Get saved specie rates
         String mapJSON = preferences.getString(Main.PREF_MAP, null);
-
         Map<String, Double> valueMap = new HashMap<String, Double>();
 
         // Check saved rates
@@ -121,8 +104,8 @@ public class SpecieWidgetProvider extends AppWidgetProvider
         // Get saved specie lists
         String namesJSON = preferences.getString(Main.PREF_NAMES, null);
         String valuesJSON = preferences.getString(Main.PREF_VALUES, null);
-
         List<String> nameList = new ArrayList<String>();
+        List<String> valueList = new ArrayList<String>();
 
         // Check saved name list
         if (namesJSON != null)
@@ -138,6 +121,51 @@ public class SpecieWidgetProvider extends AppWidgetProvider
             catch (Exception e) {}
         }
 
+        // Use the default list
+        else
+        {
+            nameList.addAll(Arrays.asList(Main.SPECIE_LIST));
+        }
+
+        // Get the saved value list
+        if (valuesJSON != null)
+        {
+            try
+            {
+                // Update value list from JSON array
+                JSONArray valuesArray = new JSONArray(valuesJSON);
+                for (int i = 0; !valuesArray.isNull(i); i++)
+                    valueList.add(valuesArray.getString(i));
+            }
+
+            catch (Exception e) {}
+        }
+
+        // Calculate value list
+        else
+        {
+            // Format each value
+            numberFormat.setGroupingUsed(true);
+            for (String name : nameList)
+            {
+                Double v = valueMap.get(name);
+                String value = numberFormat.format((v != null)? v: 0.0);
+
+                valueList.add(value);
+            }
+        }
+
+        // Create specie name list
+        List<String> specieNameList = Arrays.asList(Main.SPECIE_NAMES);
+
+        int entry = Integer.parseInt
+            (preferences.getString(Main.PREF_ENTRY, "0"));
+
+        String entryName = nameList.get(entry);
+        String entryValue = valueList.get(entry);
+        int entryIndex = specieNameList.indexOf(entryName);
+        String longName = context.getString(Main.SPECIE_LONGNAMES[entryIndex]);
+
         // Create an Intent to launch Specie
         Intent intent = new Intent(context, Main.class);
         PendingIntent pendingIntent =
@@ -150,6 +178,12 @@ public class SpecieWidgetProvider extends AppWidgetProvider
         RemoteViews views = new
             RemoteViews(context.getPackageName(), R.layout.widget);
         views.setOnClickPendingIntent(R.id.widget, pendingIntent);
+
+        views.setImageViewResource(R.id.flag, Main.SPECIE_FLAGS[entryIndex]);
+        views.setTextViewText(R.id.name, entryName);
+        views.setTextViewText(R.id.symbol, Main.SPECIE_SYMBOLS[entryIndex]);
+        views.setTextViewText(R.id.value, entryValue);
+        views.setTextViewText(R.id.long_name, longName);
 
         // Tell the AppWidgetManager to perform an update on the
         // current app widgets.
