@@ -11,6 +11,7 @@ Android currency conversion. The app is available on [F-Droid](https://f-droid.o
  * 150 international currencies
  * Currency rates updated daily
  * Last rate update retained for use offline
+ * App widget to display selected currency
 
 ## Flags
 It's quite possible that one or more of the flags shown against
@@ -63,6 +64,10 @@ icons in the toolbar will change to:
 ### Update
 * **WiFi** Update while connected on WiFi only
 * **Roaming** Update while roaming
+
+### Widget
+* **Widget entry** Select the currency entry to display in the
+  widget. Defaults to the first.
 
 ### Numbers
 * **Fraction digits** Select the number of digits to display after the
