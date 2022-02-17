@@ -75,6 +75,7 @@ public class SpecieWidgetProvider extends AppWidgetProvider
         NumberFormat numberFormat = NumberFormat.getInstance();
         numberFormat.setMinimumFractionDigits(digits);
         numberFormat.setMaximumFractionDigits(digits);
+        numberFormat.setGroupingUsed(true);
 
         // Get saved specie rates
         String mapJSON = preferences.getString(Main.PREF_MAP, null);
@@ -158,11 +159,30 @@ public class SpecieWidgetProvider extends AppWidgetProvider
         // Create specie name list
         List<String> specieNameList = Arrays.asList(Main.SPECIE_NAMES);
 
-        int entry = Integer.parseInt
+        // Get current specie
+        int currentIndex = preferences.getInt(Main.PREF_INDEX, 0);
+
+        String value = preferences.getString(Main.PREF_VALUE, "1.0");
+        String currentValue = "1.0";
+        try
+        {
+            double v = Double.parseDouble(value);
+            currentValue = numberFormat.format(v);
+        }
+
+        catch (Exception e)
+        {
+            currentValue = "1.0";
+        }
+
+        int widgetEntry = Integer.parseInt
             (preferences.getString(Main.PREF_ENTRY, "0"));
 
-        String entryName = nameList.get(entry);
-        String entryValue = valueList.get(entry);
+        if (widgetEntry >= nameList.size())
+            widgetEntry = 0;
+
+        String entryName = nameList.get(widgetEntry);
+        String entryValue = valueList.get(widgetEntry);
         int entryIndex = specieNameList.indexOf(entryName);
         String longName = context.getString(Main.SPECIE_LONGNAMES[entryIndex]);
 
@@ -178,6 +198,12 @@ public class SpecieWidgetProvider extends AppWidgetProvider
         RemoteViews views = new
             RemoteViews(context.getPackageName(), R.layout.widget);
         views.setOnClickPendingIntent(R.id.widget, pendingIntent);
+
+        views.setTextViewText(R.id.current_name,
+                              Main.SPECIE_NAMES[currentIndex]);
+        views.setTextViewText(R.id.current_symbol,
+                              Main.SPECIE_SYMBOLS[currentIndex]);
+        views.setTextViewText(R.id.current_value, currentValue);
 
         views.setImageViewResource(R.id.flag, Main.SPECIE_FLAGS[entryIndex]);
         views.setTextViewText(R.id.name, entryName);

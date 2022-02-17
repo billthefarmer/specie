@@ -421,8 +421,7 @@ public class Main extends Activity
         currentIndex = preferences.getInt(PREF_INDEX, 0);
 
         // Get widget entry
-        int widgetEntry = Integer.parseInt
-            (preferences.getString(Main.PREF_ENTRY, "0"));
+        widgetEntry = Integer.parseInt(preferences.getString(PREF_ENTRY, "0"));
 
         // Get current value
         NumberFormat numberFormat = NumberFormat.getInstance();
@@ -700,6 +699,9 @@ public class Main extends Activity
     {
         super.onPause();
 
+        // Update widgets
+        updateWidgets();
+
         // Get preferences
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
@@ -718,9 +720,9 @@ public class Main extends Activity
         editor.putString(PREF_VALUES, valueArray.toString());
 
         editor.putInt(PREF_INDEX, currentIndex);
+        editor.putString(PREF_ENTRY, Integer.toString(widgetEntry));
 
-        String value = Double.toString(currentValue);
-        editor.putString(PREF_VALUE, value);
+        editor.putString(PREF_VALUE, Double.toString(currentValue));
         editor.putString(PREF_DATE, date);
         editor.apply();
 
@@ -730,9 +732,6 @@ public class Main extends Activity
             data.setList(selectList);
             data.setMap(valueMap);
         }
-
-        // Update widgets
-        updateWidgets();
 
         // Disconnect callbacks
         data = Data.getInstance(null);
@@ -804,6 +803,17 @@ public class Main extends Activity
     // updateWidgets
     private void updateWidgets()
     {
+        // Set digits
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setMinimumFractionDigits(digits);
+        numberFormat.setMaximumFractionDigits(digits);
+        numberFormat.setGroupingUsed(true);
+
+        String value = numberFormat.format(currentValue);
+
+        if (widgetEntry >= nameList.size())
+            widgetEntry = 0;
+
         String entryName = nameList.get(widgetEntry);
         String entryValue = valueList.get(widgetEntry);
         int entryIndex = specieNameList.indexOf(entryName);
@@ -812,6 +822,10 @@ public class Main extends Activity
         // Get the layout for the widget
         RemoteViews views = new
             RemoteViews(getPackageName(), R.layout.widget);
+
+        views.setTextViewText(R.id.current_name, SPECIE_NAMES[currentIndex]);
+        views.setTextViewText(R.id.current_symbol, SPECIE_SYMBOLS[currentIndex]);
+        views.setTextViewText(R.id.current_value, value);
 
         views.setImageViewResource(R.id.flag, SPECIE_FLAGS[entryIndex]);
         views.setTextViewText(R.id.name, entryName);
