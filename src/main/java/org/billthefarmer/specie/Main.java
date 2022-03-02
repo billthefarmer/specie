@@ -611,11 +611,18 @@ public class Main extends Activity
         numberFormat.setGroupingUsed(true);
         for (String name : nameList)
         {
-            Double v = (currentValue / convertValue) *
-                ((valueMap.get(name) != null)? valueMap.get(name): 0.0);
+            try
+            {
+                Double v = (currentValue / convertValue) *
+                    valueMap.get(name);
 
-            String s = numberFormat.format(v);
-            valueList.add(s);
+                valueList.add(numberFormat.format(v));
+            }
+
+            catch (Exception e)
+            {
+                valueList.add(numberFormat.format(0.0));
+            }
         }
 
         // Clear lists
@@ -1076,11 +1083,18 @@ public class Main extends Activity
         numberFormat.setGroupingUsed(true);
         for (String name : nameList)
         {
-            Double value = (currentValue / convertValue) *
-                ((valueMap.get(name) != null)? valueMap.get(name): 0.0);
+            try
+            {
+                Double value = (currentValue / convertValue) *
+                    valueMap.get(name);
 
-            String s = numberFormat.format(value);
-            valueList.add(s);
+                valueList.add(numberFormat.format(value));
+            }
+
+            catch (Exception e)
+            {
+                valueList.add(numberFormat.format(0.0));
+            }
         }
 
         // Notify the adapter
@@ -1148,11 +1162,18 @@ public class Main extends Activity
             numberFormat.setGroupingUsed(true);
             for (String name : nameList)
             {
-                Double value = (currentValue / convertValue) *
-                               valueMap.get(name);
+                try
+                {
+                    Double value = (currentValue / convertValue) *
+                        valueMap.get(name);
 
-                s = numberFormat.format(value);
-                valueList.add(s);
+                    valueList.add(numberFormat.format(value));
+                }
+
+                catch (Exception e)
+                {
+                    valueList.add(numberFormat.format(0.0));
+                }
             }
 
             // Notify the adapter
