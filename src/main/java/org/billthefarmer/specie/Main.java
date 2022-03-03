@@ -596,15 +596,22 @@ public class Main extends Activity
             numberFormat.setGroupingUsed(true);
             for (String name : nameList)
             {
-                Double v = valueMap.get(name);
-                value = numberFormat.format((v != null)? v: 0.0);
+                try
+                {
+                    Double v = valueMap.get(name);
+                    valueList.add(numberFormat.format(v));
+                }
 
-                valueList.add(value);
+                catch (Exception e)
+                {
+                    valueList.add(numberFormat.format(0.001));
+                }
             }
         }
 
         // Get the current conversion rate
-        convertValue = valueMap.get(SPECIE_NAMES[currentIndex]);
+        convertValue = valueMap.containsKey(SPECIE_NAMES[currentIndex])?
+            valueMap.get(SPECIE_NAMES[currentIndex]): 0.001;
 
         // Recalculate all the values
         valueList.clear();
@@ -1210,10 +1217,19 @@ public class Main extends Activity
             // Set the current specie from the list
             currentIndex = specieNameList.indexOf(nameList.get(position));
 
-            currentValue = (oldValue / convertValue) *
-                valueMap.get(SPECIE_NAMES[currentIndex]);
+            try
+            {
+                currentValue = (oldValue / convertValue) *
+                    valueMap.get(SPECIE_NAMES[currentIndex]);
+            }
 
-            convertValue = valueMap.get(SPECIE_NAMES[currentIndex]);
+            catch (Exception e)
+            {
+                currentValue = 0.001;
+            }
+
+            convertValue = valueMap.containsKey(SPECIE_NAMES[currentIndex])?
+                valueMap.get(SPECIE_NAMES[currentIndex]): 0.001;
 
             numberFormat.setGroupingUsed(false);
             value = numberFormat.format(currentValue);
@@ -1338,9 +1354,10 @@ public class Main extends Activity
         // Add currencies from list
         for (int index : indexList)
         {
-            // Don't add duplicates
+            // Don't add duplicates or currencies not available
             if ((currentIndex == index) ||
-                nameList.contains(SPECIE_NAMES[index]))
+                nameList.contains(SPECIE_NAMES[index]) ||
+                !valueMap.containsKey(SPECIE_NAMES[index]))
                 continue;
 
             flagList.add(SPECIE_FLAGS[index]);
@@ -1355,12 +1372,10 @@ public class Main extends Activity
                 value = (currentValue / convertValue) *
                     valueMap.get(SPECIE_NAMES[index]);
             }
-            catch (Exception e)
-            {
-            }
 
-            String s = numberFormat.format(value);
-            valueList.add(s);
+            catch (Exception e) {}
+
+            valueList.add(numberFormat.format(value));
         }
 
         // Get preferences
@@ -1428,7 +1443,8 @@ public class Main extends Activity
             valueList.clear();
 
             // Get the convert value
-            convertValue = valueMap.get(SPECIE_NAMES[currentIndex]);
+            convertValue = valueMap.containsKey(SPECIE_NAMES[currentIndex])?
+                valueMap.get(SPECIE_NAMES[currentIndex]): 0.001;
 
             // Populate a new value list
             NumberFormat numberFormat = NumberFormat.getInstance();
@@ -1437,14 +1453,18 @@ public class Main extends Activity
             numberFormat.setGroupingUsed(true);
             for (String name : nameList)
             {
-                int index = specieNameList.indexOf(name);
+                try
+                {
+                    Double value = (currentValue / convertValue) *
+                        valueMap.get(name);
 
-                Double value = (currentValue / convertValue) *
-                    ((valueMap.get(name) != null)? valueMap.get(name): 0.0);
+                    valueList.add(numberFormat.format(value));
+                }
 
-                String s = numberFormat.format(value);
-
-                valueList.add(s);
+                catch (Exception e)
+                {
+                    valueList.add(numberFormat.format(0.001));
+                }
             }
 
             // Get preferences
