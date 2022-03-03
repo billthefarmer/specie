@@ -604,14 +604,14 @@ public class Main extends Activity
 
                 catch (Exception e)
                 {
-                    valueList.add(numberFormat.format(0.001));
+                    valueList.add(numberFormat.format(Double.NaN));
                 }
             }
         }
 
         // Get the current conversion rate
         convertValue = valueMap.containsKey(SPECIE_NAMES[currentIndex])?
-            valueMap.get(SPECIE_NAMES[currentIndex]): 0.001;
+            valueMap.get(SPECIE_NAMES[currentIndex]): Double.NaN;
 
         // Recalculate all the values
         valueList.clear();
@@ -1225,11 +1225,11 @@ public class Main extends Activity
 
             catch (Exception e)
             {
-                currentValue = 0.001;
+                currentValue = Double.NaN;
             }
 
             convertValue = valueMap.containsKey(SPECIE_NAMES[currentIndex])?
-                valueMap.get(SPECIE_NAMES[currentIndex]): 0.001;
+                valueMap.get(SPECIE_NAMES[currentIndex]): Double.NaN;
 
             numberFormat.setGroupingUsed(false);
             value = numberFormat.format(currentValue);
@@ -1444,7 +1444,7 @@ public class Main extends Activity
 
             // Get the convert value
             convertValue = valueMap.containsKey(SPECIE_NAMES[currentIndex])?
-                valueMap.get(SPECIE_NAMES[currentIndex]): 0.001;
+                valueMap.get(SPECIE_NAMES[currentIndex]): Double.NaN;
 
             // Populate a new value list
             NumberFormat numberFormat = NumberFormat.getInstance();
@@ -1463,7 +1463,7 @@ public class Main extends Activity
 
                 catch (Exception e)
                 {
-                    valueList.add(numberFormat.format(0.001));
+                    valueList.add(numberFormat.format(Double.NaN));
                 }
             }
 
