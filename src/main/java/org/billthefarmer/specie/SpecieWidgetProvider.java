@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  Specie - An android specie converter.
+//  Specie - An android currency converter.
 //
 //  Copyright (C) 2016	Bill Farmer
 //
@@ -31,9 +31,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.text.Html;
 import android.util.Log;
 import android.widget.RemoteViews;
 
