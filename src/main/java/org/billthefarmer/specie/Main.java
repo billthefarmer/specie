@@ -825,36 +825,48 @@ public class Main extends Activity
 
         String value = numberFormat.format(currentValue);
 
-        if (widgetEntry >= nameList.size())
-            widgetEntry = 0;
-
-        String entryName = nameList.get(widgetEntry);
-        String entryValue = valueList.get(widgetEntry);
-        int entryIndex = specieNameList.indexOf(entryName);
-        String longName = getString(SPECIE_LONGNAMES[entryIndex]);
-
-        // Get the layout for the widget
-        RemoteViews views = new
-            RemoteViews(getPackageName(), R.layout.widget);
-
-        views.setTextViewText(R.id.current_name, SPECIE_NAMES[currentIndex]);
-        views.setTextViewText(R.id.current_symbol, SPECIE_SYMBOLS[currentIndex]);
-        views.setTextViewText(R.id.current_value, value);
-
-        views.setImageViewResource(R.id.flag, SPECIE_FLAGS[entryIndex]);
-        views.setTextViewText(R.id.name, entryName);
-        views.setTextViewText(R.id.symbol, SPECIE_SYMBOLS[entryIndex]);
-        views.setTextViewText(R.id.value, entryValue);
-        views.setTextViewText(R.id.long_name, longName);
+        // Get preferences
+        SharedPreferences preferences =
+            PreferenceManager.getDefaultSharedPreferences(this);
 
         // Get manager
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         ComponentName provider = new
             ComponentName(this, SpecieWidgetProvider.class);
 
-        // Tell the AppWidgetManager to perform an update on the
-        // current app widgets.
-        appWidgetManager.updateAppWidget(provider, views);
+        // Get the layout for the widget
+        RemoteViews views = new
+            RemoteViews(getPackageName(), R.layout.widget);
+
+        int appWidgetIds[] = appWidgetManager.getAppWidgetIds(provider);
+        for (int appWidgetId: appWidgetIds)
+        {
+            widgetEntry = preferences.getInt(String.valueOf(appWidgetId),
+                                             widgetEntry);
+            if (widgetEntry >= nameList.size())
+                widgetEntry = 0;
+
+            String entryName = nameList.get(widgetEntry);
+            String entryValue = valueList.get(widgetEntry);
+            int entryIndex = specieNameList.indexOf(entryName);
+            String longName = getString(SPECIE_LONGNAMES[entryIndex]);
+
+            views.setTextViewText(R.id.current_name,
+                                  SPECIE_NAMES[currentIndex]);
+            views.setTextViewText(R.id.current_symbol,
+                                  SPECIE_SYMBOLS[currentIndex]);
+            views.setTextViewText(R.id.current_value, value);
+
+            views.setImageViewResource(R.id.flag, SPECIE_FLAGS[entryIndex]);
+            views.setTextViewText(R.id.name, entryName);
+            views.setTextViewText(R.id.symbol, SPECIE_SYMBOLS[entryIndex]);
+            views.setTextViewText(R.id.value, entryValue);
+            views.setTextViewText(R.id.long_name, longName);
+
+            // Tell the AppWidgetManager to perform an update on the
+            // current app widget.
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
     }
 
     // On add click

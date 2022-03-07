@@ -38,6 +38,15 @@
         android:name="SettingsActivity"
         android:label="@string/settings" />
 
+    <activity
+        android:name="SpecieWidgetConfigure"
+        android:theme="@style/DialogTheme"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+      </intent-filter>
+    </activity>
+
     <receiver
         android:name="SpecieWidgetProvider"
         android:exported="true">

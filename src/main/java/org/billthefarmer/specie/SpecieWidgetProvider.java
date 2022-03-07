@@ -173,44 +173,61 @@ public class SpecieWidgetProvider extends AppWidgetProvider
             currentValue = "1.0";
         }
 
-        int widgetEntry = Integer.parseInt
-            (preferences.getString(Main.PREF_ENTRY, "0"));
-
-        if (widgetEntry >= nameList.size())
-            widgetEntry = 0;
-
-        String entryName = nameList.get(widgetEntry);
-        String entryValue = valueList.get(widgetEntry);
-        int entryIndex = specieNameList.indexOf(entryName);
-        String longName = context.getString(Main.SPECIE_LONGNAMES[entryIndex]);
-
         // Create an Intent to launch Specie
         Intent intent = new Intent(context, Main.class);
         PendingIntent pendingIntent =
             PendingIntent.getActivity(context, 0, intent,
                                       PendingIntent.FLAG_UPDATE_CURRENT |
                                       PendingIntent.FLAG_IMMUTABLE);
-
-        // Get the layout for the widget and attach an on-click
-        // listener to the view.
+        // Get the layout for the widget
         RemoteViews views = new
             RemoteViews(context.getPackageName(), R.layout.widget);
-        views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 
-        views.setTextViewText(R.id.current_name,
-                              Main.SPECIE_NAMES[currentIndex]);
-        views.setTextViewText(R.id.current_symbol,
-                              Main.SPECIE_SYMBOLS[currentIndex]);
-        views.setTextViewText(R.id.current_value, currentValue);
+        for (int appWidgetId: appWidgetIds)
+        {
+            int widgetEntry = Integer.parseInt
+                (preferences.getString(Main.PREF_ENTRY, "0"));
 
-        views.setImageViewResource(R.id.flag, Main.SPECIE_FLAGS[entryIndex]);
-        views.setTextViewText(R.id.name, entryName);
-        views.setTextViewText(R.id.symbol, Main.SPECIE_SYMBOLS[entryIndex]);
-        views.setTextViewText(R.id.value, entryValue);
-        views.setTextViewText(R.id.long_name, longName);
+            widgetEntry = preferences.getInt(String.valueOf(appWidgetId),
+                                             widgetEntry);
 
-        // Tell the AppWidgetManager to perform an update on the
-        // current app widgets.
-        appWidgetManager.updateAppWidget(appWidgetIds, views);
+            if (widgetEntry >= nameList.size())
+                widgetEntry = 0;
+
+            String entryName = nameList.get(widgetEntry);
+            String entryValue = valueList.get(widgetEntry);
+            int entryIndex = specieNameList.indexOf(entryName);
+            String longName = context.getString(Main.SPECIE_LONGNAMES[entryIndex]);
+
+            // Create an Intent to configure widget
+            Intent config = new Intent(context, SpecieWidgetConfigure.class);
+            config.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            PendingIntent configIntent =
+                PendingIntent.getActivity(context, 0, config,
+                                          PendingIntent.FLAG_UPDATE_CURRENT |
+                                          PendingIntent.FLAG_IMMUTABLE);
+
+            // Attach an on-click listener to the view.
+            views.setOnClickPendingIntent(R.id.widget, pendingIntent);
+            views.setOnClickPendingIntent(R.id.config, configIntent);
+
+            views.setTextViewText(R.id.current_name,
+                                  Main.SPECIE_NAMES[currentIndex]);
+            views.setTextViewText(R.id.current_symbol,
+                                  Main.SPECIE_SYMBOLS[currentIndex]);
+            views.setTextViewText(R.id.current_value, currentValue);
+
+            views.setImageViewResource(R.id.flag,
+                                       Main.SPECIE_FLAGS[entryIndex]);
+            views.setTextViewText(R.id.name, entryName);
+            views.setTextViewText(R.id.symbol,
+                                  Main.SPECIE_SYMBOLS[entryIndex]);
+            views.setTextViewText(R.id.value, entryValue);
+            views.setTextViewText(R.id.long_name, longName);
+
+            // Tell the AppWidgetManager to perform an update on the
+            // current app widget.
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
     }
 }
