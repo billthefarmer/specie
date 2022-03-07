@@ -53,6 +53,8 @@ import org.json.JSONObject;
 
 public class SpecieWidgetProvider extends AppWidgetProvider
 {
+    public static final String TAG = "SpecieWidgetProvider";
+
     // onUpdate
     @Override
     @SuppressLint("InlinedApi")
@@ -173,16 +175,6 @@ public class SpecieWidgetProvider extends AppWidgetProvider
             currentValue = "1.0";
         }
 
-        // Create an Intent to launch Specie
-        Intent intent = new Intent(context, Main.class);
-        PendingIntent pendingIntent =
-            PendingIntent.getActivity(context, 0, intent,
-                                      PendingIntent.FLAG_UPDATE_CURRENT |
-                                      PendingIntent.FLAG_IMMUTABLE);
-        // Get the layout for the widget
-        RemoteViews views = new
-            RemoteViews(context.getPackageName(), R.layout.widget);
-
         for (int appWidgetId: appWidgetIds)
         {
             int widgetEntry = Integer.parseInt
@@ -199,6 +191,13 @@ public class SpecieWidgetProvider extends AppWidgetProvider
             int entryIndex = specieNameList.indexOf(entryName);
             String longName = context.getString(Main.SPECIE_LONGNAMES[entryIndex]);
 
+            // Create an Intent to launch Specie
+            Intent intent = new Intent(context, Main.class);
+            PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, 0, intent,
+                                          PendingIntent.FLAG_UPDATE_CURRENT |
+                                          PendingIntent.FLAG_IMMUTABLE);
+
             // Create an Intent to configure widget
             Intent config = new Intent(context, SpecieWidgetConfigure.class);
             config.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -206,6 +205,9 @@ public class SpecieWidgetProvider extends AppWidgetProvider
                 PendingIntent.getActivity(context, 0, config,
                                           PendingIntent.FLAG_UPDATE_CURRENT |
                                           PendingIntent.FLAG_IMMUTABLE);
+            // Get the layout for the widget
+            RemoteViews views = new
+                RemoteViews(context.getPackageName(), R.layout.widget);
 
             // Attach an on-click listener to the view.
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);

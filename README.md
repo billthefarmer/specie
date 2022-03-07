@@ -60,6 +60,15 @@ icons in the toolbar will change to:
 * **Remove** the selected currencies.
 * **Copy** selection value to clipboard. Only one value will be copied.
 
+## Widget
+On creating a widget a selection dialog will pop up showing the
+current currencies. Select the currency to display. This overrides the
+**Widget entry** setting. Touch the configure icon in the top right of
+the widget to change the currency. This will only change the currency
+for the last widget created regardless of which widget was
+touched. Android 12 provides an alternate method of configuring
+widgets which will work correctly.
+
 ## Settings
 ### Update
 * **WiFi** Update while connected on WiFi only
