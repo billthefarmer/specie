@@ -76,7 +76,8 @@ widgets which will work correctly.
 
 ### Widget
 * **Widget entry** Select the currency entry to display in the
-  widget. Defaults to the first.
+  widget. Defaults to the first. This is overridden by the widget
+  configuration dialog.
 
 ### Numbers
 * **Fraction digits** Select the number of digits to display after the
