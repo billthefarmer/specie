@@ -11,11 +11,17 @@ Android currency conversion. The app is available on [F-Droid](https://f-droid.o
  * 150 international currencies
  * Currency rates updated daily
  * Last rate update retained for use offline
+ * Multiple translations, except all currency names
  * App widget to display selected currency
 
 ## Flags
 It's quite possible that one or more of the flags shown against
 currencies are incorrect. If so, please report an
+[issue](https://github.com/billthefarmer/specie/issues).
+
+## Currency name translations
+Not all the 150 currency names are translated. if you have
+translations please report an
 [issue](https://github.com/billthefarmer/specie/issues).
 
 ## Usage

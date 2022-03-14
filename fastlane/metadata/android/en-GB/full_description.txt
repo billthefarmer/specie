@@ -4,3 +4,5 @@ Simple currency conversion.
  * 150 international currencies
  * Currency rates updated daily
  * Last rate update retained for use offline
+ * Multiple translations, except all currency names
+ * App widget to display selected currency
