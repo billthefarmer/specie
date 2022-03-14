@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string-array name="pref_digit_entries">
+    <item>1 цифра</item>
+    <item>2 цифры</item>
+    <item>3 цифры</item>
+    <item>4 цифры</item>
+    <item>5 цифр</item>
+  </string-array>
+
+  <string-array name="pref_widget_entries">
+    <item>Первый элемент</item>
+    <item>Второй элемент</item>
+    <item>Третий элемент</item>
+    <item>Четвёртый элемент</item>
+    <item>Пятый элемент</item>
+    <item>Шестой элемент</item>
+    <item>Седьмой элемент</item>
+    <item>Восьмой элемент</item>
+  </string-array>
+</resources>
