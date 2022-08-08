@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath 'com.android.tools.build:gradle:7.2.2'
     }
 }
 
@@ -29,8 +29,8 @@ android {
         applicationId "org.billthefarmer.specie"
         minSdkVersion 14
         targetSdkVersion 28
-        versionName "1.05"
-        versionCode 105
+        versionName "1.06"
+        versionCode 106
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
