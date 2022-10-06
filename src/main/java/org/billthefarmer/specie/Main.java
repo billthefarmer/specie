@@ -82,6 +82,10 @@ public class Main extends Activity
     View.OnClickListener, TextWatcher,
     Data.TaskCallbacks
 {
+
+    // Initial active specie name
+    public static final String DEFAULT_SPECIE = "EUR";
+
     // Initial specie name list
     public static final String SPECIE_LIST[] =
     {
@@ -419,7 +423,10 @@ public class Main extends Activity
             recreate();
 
         // Get current specie
-        currentIndex = preferences.getInt(PREF_INDEX, 0);
+        currentIndex = preferences.getInt(PREF_INDEX, -1);
+        if (currentIndex == -1) {
+            currentIndex = currencyIndex(DEFAULT_SPECIE);
+        }
 
         // Get widget entry
         widgetEntry = Integer.parseInt(preferences.getString(PREF_ENTRY, "0"));
