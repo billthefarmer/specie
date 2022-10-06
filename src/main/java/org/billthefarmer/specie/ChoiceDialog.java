@@ -257,6 +257,7 @@ public class ChoiceDialog extends Activity
         return true;
     }
 
+    // onQueryTextChange
     @Override
     public boolean onQueryTextChange(String newText)
     {
@@ -278,6 +279,6 @@ public class ChoiceDialog extends Activity
     @Override
     public boolean onQueryTextSubmit(String query)
     {
-        return true;
+        return false;
     }
 }
