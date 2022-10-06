@@ -82,7 +82,6 @@ public class Main extends Activity
     View.OnClickListener, TextWatcher,
     Data.TaskCallbacks
 {
-
     // Initial active specie name
     public static final String DEFAULT_SPECIE = "EUR";
 

@@ -8,6 +8,13 @@
     android:layout_marginRight="8dp"
     android:orientation="vertical">
 
+  <SearchView
+      android:id="@+id/search"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="textCapCharacters"
+      android:imeOptions="actionDone" />
+
   <ListView
       android:id="@+id/list"
       android:layout_width="match_parent"

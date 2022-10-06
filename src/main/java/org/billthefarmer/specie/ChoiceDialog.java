@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +41,7 @@ import java.util.List;
 // Choice dialog
 public class ChoiceDialog extends Activity
     implements View.OnClickListener, AdapterView.OnItemClickListener,
-    AdapterView.OnItemLongClickListener
+    AdapterView.OnItemLongClickListener, SearchView.OnQueryTextListener
 {
 
     private Button clear;
@@ -48,6 +49,7 @@ public class ChoiceDialog extends Activity
 
     private List<Integer> selectList;
 
+    private ListView listView;
     private ChoiceAdapter adapter;
 
     private int mode = Main.DISPLAY_MODE;
@@ -70,11 +72,13 @@ public class ChoiceDialog extends Activity
         setContentView(R.layout.choose);
 
         // Find views
-        ListView listView = findViewById(R.id.list);
+        listView = findViewById(R.id.list);
 
         Button cancel = findViewById(R.id.cancel);
         clear = findViewById(R.id.clear);
         select = findViewById(R.id.select);
+
+        SearchView search = findViewById(R.id.search);
 
         // Set the listeners
         if (listView != null)
@@ -91,6 +95,9 @@ public class ChoiceDialog extends Activity
 
         if (select != null)
             select.setOnClickListener(this);
+
+        if (search != null)
+            search.setOnQueryTextListener(this);
 
         selectList = new ArrayList<>();
 
@@ -247,6 +254,30 @@ public class ChoiceDialog extends Activity
         selectList.clear();
         selectList.add(position);
         adapter.notifyDataSetChanged();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText)
+    {
+        if (newText.length() > 0)
+        {
+            for (int i = 0; i < Main.SPECIES.length; i++)
+            {
+                if (Main.SPECIES[i].name.startsWith(newText))
+                {
+                    listView.smoothScrollToPosition(i);
+                    break;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query)
+    {
         return true;
     }
 }
