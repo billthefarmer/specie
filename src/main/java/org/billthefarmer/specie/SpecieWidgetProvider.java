@@ -156,9 +156,6 @@ public class SpecieWidgetProvider extends AppWidgetProvider
             }
         }
 
-        // Create specie name list
-        List<String> specieNameList = Arrays.asList(Main.SPECIE_NAMES);
-
         // Get current specie
         int currentIndex = preferences.getInt(Main.PREF_INDEX, 0);
 
@@ -188,8 +185,8 @@ public class SpecieWidgetProvider extends AppWidgetProvider
 
             String entryName = nameList.get(widgetEntry);
             String entryValue = valueList.get(widgetEntry);
-            int entryIndex = specieNameList.indexOf(entryName);
-            String longName = context.getString(Main.SPECIE_LONGNAMES[entryIndex]);
+            int entryIndex = Main.specieIndex(entryName);
+            String longName = context.getString(Main.SPECIES[entryIndex].longname);
 
             // Create an Intent to launch Specie
             Intent intent = new Intent(context, Main.class);
@@ -214,16 +211,16 @@ public class SpecieWidgetProvider extends AppWidgetProvider
             views.setOnClickPendingIntent(R.id.config, configIntent);
 
             views.setTextViewText(R.id.current_name,
-                                  Main.SPECIE_NAMES[currentIndex]);
+                                  Main.SPECIES[currentIndex].name);
             views.setTextViewText(R.id.current_symbol,
-                                  Main.SPECIE_SYMBOLS[currentIndex]);
+                                  Main.SPECIES[currentIndex].symbol);
             views.setTextViewText(R.id.current_value, currentValue);
 
             views.setImageViewResource(R.id.flag,
-                                       Main.SPECIE_FLAGS[entryIndex]);
+                                       Main.SPECIES[entryIndex].flag);
             views.setTextViewText(R.id.name, entryName);
             views.setTextViewText(R.id.symbol,
-                                  Main.SPECIE_SYMBOLS[entryIndex]);
+                                  Main.SPECIES[entryIndex].symbol);
             views.setTextViewText(R.id.value, entryValue);
             views.setTextViewText(R.id.long_name, longName);
 

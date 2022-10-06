@@ -125,24 +125,18 @@ public class SpecieWidgetConfigure extends Activity
             nameList.addAll(Arrays.asList(Main.SPECIE_LIST));
         }
 
-        // Create specie name list
-        List<String> specieNameList = Arrays.asList(Main.SPECIE_NAMES);
-
         // Populate the lists
-        List<Integer> flagList = new ArrayList<Integer>();
-        List<Integer> longNameList = new ArrayList<Integer>();
-        List<Integer> selectList = new ArrayList<Integer>();
+        List<Main.Specie> speciesList = new ArrayList<>();
+        List<Integer> selectList = new ArrayList<>();
         for (String name: nameList)
         {
-            int index = specieNameList.indexOf(name);
-            flagList.add(Main.SPECIE_FLAGS[index]);
-            longNameList.add(Main.SPECIE_LONGNAMES[index]);
+            int index = Main.specieIndex(name);
+            speciesList.add(Main.SPECIES[index]);
         }
 
         // Create the adapter
         ChoiceAdapter adapter = new ChoiceAdapter(this, R.layout.choice,
-                                                  flagList, nameList,
-                                                  longNameList, selectList);
+                                                  speciesList, selectList);
         // Set the adapter
         if (listView != null)
             listView.setAdapter(adapter);

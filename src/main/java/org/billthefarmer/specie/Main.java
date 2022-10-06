@@ -92,151 +92,187 @@ public class Main extends Activity
         "USD", "GBP", "CAD", "AUD"
     };
 
-    // Specie names
-    public static final String SPECIE_NAMES[] =
+    public static final class Specie
     {
-        "EUR", "USD", "GBP", "JPY", "AUD", "CHF", "CAD", "SVC", "CVE", "ZMW",
-        "YER", "LKR", "PLN", "PEN", "IQD", "STN", "XPF", "ALL", "MUR", "DOP",
-        "NZD", "HRK", "DZD", "ARS", "PYG", "BND", "KMF", "SZL", "SOS", "ANG",
-        "PKR", "KRW", "AZN", "CRC", "JMD", "SSP", "ERN", "WST", "EGP", "SGD",
-        "ZAR", "KGS", "MGA", "SRD", "GHS", "MOP", "BAM", "INR", "TRY", "TWD",
-        "TMT", "VES", "SBD", "MWK", "GTQ", "LBP", "HUF", "NGN", "IRR", "MKD",
-        "BIF", "MMK", "MVR", "SEK", "NPR", "ISK", "GIP", "GEL", "COP", "BZD",
-        "GNF", "SLL", "KES", "AED", "PHP", "ILS", "MRO", "BOB", "GYD", "RWF",
-        "MZN", "UGX", "CNY", "SAR", "MYR", "KZT", "AFN", "NAD", "SYP", "TOP",
-        "VUV", "IDR", "TND", "XOF", "TJS", "ETB", "XCD", "LAK", "BWP", "KWD",
-        "CZK", "PGK", "UAH", "GMD", "AWG", "AOA", "KHR", "NOK", "MAD", "RON",
-        "BYN", "RSD", "BSD", "DJF", "HNL", "SCR", "BHD", "OMR", "RUB", "LYD",
-        "CLP", "UYU", "FJD", "CDF", "LSL", "TZS", "BBD", "BDT", "QAR", "MXN",
-        "AMD", "NIO", "LRD", "SDG", "MRU", "MNT", "BRL", "HKD", "THB", "XAF",
-        "MDL", "PAB", "TTD", "HTG", "CUP", "DKK", "JOD", "BGN", "VND", "UZS"
+        public final String name;
+        public final String symbol;
+        public final int longname;
+        public final int flag;
+
+        private Specie(String name, String symbol, int longname, int flag)
+        {
+            this.name = name;
+            this.symbol = symbol;
+            this.longname = longname;
+            this.flag = flag;
+        }
+    }
+
+    public static final Specie SPECIES[] =
+    {
+        new Specie("EUR", "€",    R.string.long_eur, R.drawable.flag_eu),
+        new Specie("USD", "$",    R.string.long_usd, R.drawable.flag_us),
+        new Specie("GBP", "£",    R.string.long_gbp, R.drawable.flag_gb),
+        new Specie("JPY", "¥",    R.string.long_jpy, R.drawable.flag_jp),
+        new Specie("AUD", "$",    R.string.long_aud, R.drawable.flag_au),
+        new Specie("CHF", "",     R.string.long_chf, R.drawable.flag_ch),
+        new Specie("CAD", "$",    R.string.long_cad, R.drawable.flag_ca),
+        new Specie("SVC", "$",    R.string.long_svc, R.drawable.flag_sv),
+        new Specie("CVE", "",     R.string.long_cve, R.drawable.flag_cv),
+        new Specie("ZMW", "",     R.string.long_zmw, R.drawable.flag_zm),
+        new Specie("YER", "﷼",    R.string.long_yer, R.drawable.flag_ye),
+        new Specie("LKR", "₨",    R.string.long_lkr, R.drawable.flag_lk),
+        new Specie("PLN", "zł",   R.string.long_pln, R.drawable.flag_pl),
+        new Specie("PEN", "S/.",  R.string.long_pen, R.drawable.flag_pe),
+        new Specie("IQD", "",     R.string.long_iqd, R.drawable.flag_iq),
+        new Specie("STN", "",     R.string.long_stn, R.drawable.flag_st),
+        new Specie("XPF", "",     R.string.long_xpf, R.drawable.flag_pf),
+        new Specie("ALL", "Lek",  R.string.long_all, R.drawable.flag_al),
+        new Specie("MUR", "₨",    R.string.long_mur, R.drawable.flag_mu),
+        new Specie("DOP", "RD$",  R.string.long_dop, R.drawable.flag_do),
+        new Specie("NZD", "$",    R.string.long_nzd, R.drawable.flag_nz),
+        new Specie("HRK", "kn",   R.string.long_hrk, R.drawable.flag_hr),
+        new Specie("DZD", "",     R.string.long_dzd, R.drawable.flag_dz),
+        new Specie("ARS", "$",    R.string.long_ars, R.drawable.flag_ar),
+        new Specie("PYG", "Gs",   R.string.long_pyg, R.drawable.flag_py),
+        new Specie("BND", "$",    R.string.long_bnd, R.drawable.flag_bn),
+        new Specie("KMF", "",     R.string.long_kmf, R.drawable.flag_km),
+        new Specie("SZL", "",     R.string.long_szl, R.drawable.flag_sz),
+        new Specie("SOS", "S",    R.string.long_sos, R.drawable.flag_so),
+        new Specie("ANG", "ƒ",    R.string.long_ang, R.drawable.flag_cw),
+        new Specie("PKR", "₨",    R.string.long_pkr, R.drawable.flag_pk),
+        new Specie("KRW", "₩",    R.string.long_krw, R.drawable.flag_kr),
+        new Specie("AZN", "₼",    R.string.long_azn, R.drawable.flag_az),
+        new Specie("CRC", "₡",    R.string.long_crc, R.drawable.flag_cr),
+        new Specie("JMD", "J$",   R.string.long_jmd, R.drawable.flag_jm),
+        new Specie("SSP", "",     R.string.long_ssp, R.drawable.flag_ss),
+        new Specie("ERN", "",     R.string.long_ern, R.drawable.flag_er),
+        new Specie("WST", "",     R.string.long_wst, R.drawable.flag_ws),
+        new Specie("EGP", "£",    R.string.long_egp, R.drawable.flag_eg),
+        new Specie("SGD", "$",    R.string.long_sgd, R.drawable.flag_sg),
+        new Specie("ZAR", "R",    R.string.long_zar, R.drawable.flag_za),
+        new Specie("KGS", "лв",   R.string.long_kgs, R.drawable.flag_kg),
+        new Specie("MGA", "",     R.string.long_mga, R.drawable.flag_mg),
+        new Specie("SRD", "$",    R.string.long_srd, R.drawable.flag_sr),
+        new Specie("GHS", "",     R.string.long_ghs, R.drawable.flag_gh),
+        new Specie("MOP", "",     R.string.long_mop, R.drawable.flag_mo),
+        new Specie("BAM", "KM",   R.string.long_bam, R.drawable.flag_ba),
+        new Specie("INR", "₹",    R.string.long_inr, R.drawable.flag_in),
+        new Specie("TRY", "",     R.string.long_try, R.drawable.flag_tr),
+        new Specie("TWD", "NT$",  R.string.long_twd, R.drawable.flag_tw),
+        new Specie("TMT", "",     R.string.long_tmt, R.drawable.flag_tm),
+        new Specie("VES", "",     R.string.long_ves, R.drawable.flag_ve),
+        new Specie("SBD", "$",    R.string.long_sbd, R.drawable.flag_sb),
+        new Specie("MWK", "",     R.string.long_mwk, R.drawable.flag_mw),
+        new Specie("GTQ", "Q",    R.string.long_gtq, R.drawable.flag_gt),
+        new Specie("LBP", "£",    R.string.long_lbp, R.drawable.flag_lb),
+        new Specie("HUF", "Ft",   R.string.long_huf, R.drawable.flag_hu),
+        new Specie("NGN", "₦",    R.string.long_ngn, R.drawable.flag_ng),
+        new Specie("IRR", "﷼",    R.string.long_irr, R.drawable.flag_ir),
+        new Specie("MKD", "ден",  R.string.long_mkd, R.drawable.flag_mk),
+        new Specie("BIF", "",     R.string.long_bif, R.drawable.flag_bi),
+        new Specie("MMK", "",     R.string.long_mmk, R.drawable.flag_mm),
+        new Specie("MVR", "",     R.string.long_mvr, R.drawable.flag_mv),
+        new Specie("SEK", "kr",   R.string.long_sek, R.drawable.flag_se),
+        new Specie("NPR", "₨",    R.string.long_npr, R.drawable.flag_np),
+        new Specie("ISK", "kr",   R.string.long_isk, R.drawable.flag_is),
+        new Specie("GIP", "£",    R.string.long_gip, R.drawable.flag_gi),
+        new Specie("GEL", "₾",    R.string.long_gel, R.drawable.flag_ge),
+        new Specie("COP", "$",    R.string.long_cop, R.drawable.flag_co),
+        new Specie("BZD", "BZ$",  R.string.long_bzd, R.drawable.flag_bz),
+        new Specie("GNF", "",     R.string.long_gnf, R.drawable.flag_gn),
+        new Specie("SLL", "",     R.string.long_sll, R.drawable.flag_sl),
+        new Specie("KES", "",     R.string.long_kes, R.drawable.flag_ke),
+        new Specie("AED", "",     R.string.long_aed, R.drawable.flag_ae),
+        new Specie("PHP", "₱",    R.string.long_php, R.drawable.flag_ph),
+        new Specie("ILS", "₪",    R.string.long_ils, R.drawable.flag_il),
+        new Specie("MRO", "",     R.string.long_mro, R.drawable.flag_mr),
+        new Specie("BOB", "$b",   R.string.long_bob, R.drawable.flag_bo),
+        new Specie("GYD", "$",    R.string.long_gyd, R.drawable.flag_gy),
+        new Specie("RWF", "",     R.string.long_rwf, R.drawable.flag_rw),
+        new Specie("MZN", "MT",   R.string.long_mzn, R.drawable.flag_mz),
+        new Specie("UGX", "",     R.string.long_ugx, R.drawable.flag_ug),
+        new Specie("CNY", "¥",    R.string.long_cny, R.drawable.flag_cn),
+        new Specie("SAR", "﷼",    R.string.long_sar, R.drawable.flag_sa),
+        new Specie("MYR", "RM",   R.string.long_myr, R.drawable.flag_my),
+        new Specie("KZT", "лв",   R.string.long_kzt, R.drawable.flag_kz),
+        new Specie("AFN", "؋",    R.string.long_afn, R.drawable.flag_af),
+        new Specie("NAD", "$",    R.string.long_nad, R.drawable.flag_na),
+        new Specie("SYP", "£",    R.string.long_syp, R.drawable.flag_sy),
+        new Specie("TOP", "",     R.string.long_top, R.drawable.flag_to),
+        new Specie("VUV", "",     R.string.long_vuv, R.drawable.flag_vu),
+        new Specie("IDR", "Rp",   R.string.long_idr, R.drawable.flag_id),
+        new Specie("TND", "",     R.string.long_tnd, R.drawable.flag_tn),
+        new Specie("XOF", "",     R.string.long_xof, R.drawable.flag_be),
+        new Specie("TJS", "",     R.string.long_tjs, R.drawable.flag_tj),
+        new Specie("ETB", "",     R.string.long_etb, R.drawable.flag_et),
+        new Specie("XCD", "",     R.string.long_xcd, R.drawable.flag_ag),
+        new Specie("LAK", "₭",    R.string.long_lak, R.drawable.flag_la),
+        new Specie("BWP", "P",    R.string.long_bwp, R.drawable.flag_bw),
+        new Specie("KWD", "",     R.string.long_kwd, R.drawable.flag_kw),
+        new Specie("CZK", "Kč",   R.string.long_czk, R.drawable.flag_cz),
+        new Specie("PGK", "",     R.string.long_pgk, R.drawable.flag_pg),
+        new Specie("UAH", "₴",    R.string.long_uah, R.drawable.flag_ua),
+        new Specie("GMD", "",     R.string.long_gmd, R.drawable.flag_gm),
+        new Specie("AWG", "ƒ",    R.string.long_awg, R.drawable.flag_aw),
+        new Specie("AOA", "",     R.string.long_aoa, R.drawable.flag_ao),
+        new Specie("KHR", "៛",    R.string.long_khr, R.drawable.flag_kh),
+        new Specie("NOK", "kr",   R.string.long_nok, R.drawable.flag_no),
+        new Specie("MAD", "",     R.string.long_mad, R.drawable.flag_ma),
+        new Specie("RON", "lei",  R.string.long_ron, R.drawable.flag_ro),
+        new Specie("BYN", "",     R.string.long_byn, R.drawable.flag_by),
+        new Specie("RSD", "Дин.", R.string.long_rsd, R.drawable.flag_rs),
+        new Specie("BSD", "$",    R.string.long_bsd, R.drawable.flag_bs),
+        new Specie("DJF", "",     R.string.long_djf, R.drawable.flag_dj),
+        new Specie("HNL", "L",    R.string.long_hnl, R.drawable.flag_hn),
+        new Specie("SCR", "₨",    R.string.long_scr, R.drawable.flag_sc),
+        new Specie("BHD", "",     R.string.long_bhd, R.drawable.flag_bh),
+        new Specie("OMR", "﷼",    R.string.long_omr, R.drawable.flag_om),
+        new Specie("RUB", "₽",    R.string.long_rub, R.drawable.flag_ru),
+        new Specie("LYD", "",     R.string.long_lyd, R.drawable.flag_ly),
+        new Specie("CLP", "$",    R.string.long_clp, R.drawable.flag_cl),
+        new Specie("UYU", "$U",   R.string.long_uyu, R.drawable.flag_uy),
+        new Specie("FJD", "$",    R.string.long_fjd, R.drawable.flag_fj),
+        new Specie("CDF", "",     R.string.long_cdf, R.drawable.flag_cd),
+        new Specie("LSL", "",     R.string.long_lsl, R.drawable.flag_ls),
+        new Specie("TZS", "",     R.string.long_tzs, R.drawable.flag_tz),
+        new Specie("BBD", "$",    R.string.long_bbd, R.drawable.flag_bb),
+        new Specie("BDT", "",     R.string.long_bdt, R.drawable.flag_bd),
+        new Specie("QAR", "﷼",    R.string.long_qar, R.drawable.flag_qa),
+        new Specie("MXN", "$",    R.string.long_mxn, R.drawable.flag_mx),
+        new Specie("AMD", "",     R.string.long_amd, R.drawable.flag_am),
+        new Specie("NIO", "C$",   R.string.long_nio, R.drawable.flag_ni),
+        new Specie("LRD", "$",    R.string.long_lrd, R.drawable.flag_lr),
+        new Specie("SDG", "",     R.string.long_sdg, R.drawable.flag_sd),
+        new Specie("MRU", "",     R.string.long_mru, R.drawable.flag_mr),
+        new Specie("MNT", "₮",    R.string.long_mnt, R.drawable.flag_mn),
+        new Specie("BRL", "R$",   R.string.long_brl, R.drawable.flag_br),
+        new Specie("HKD", "$",    R.string.long_hkd, R.drawable.flag_hk),
+        new Specie("THB", "฿",    R.string.long_thb, R.drawable.flag_th),
+        new Specie("XAF", "",     R.string.long_xaf, R.drawable.flag_cm),
+        new Specie("MDL", "",     R.string.long_mdl, R.drawable.flag_md),
+        new Specie("PAB", "B/.",  R.string.long_pab, R.drawable.flag_pa),
+        new Specie("TTD", "TT$",  R.string.long_ttd, R.drawable.flag_tt),
+        new Specie("HTG", "",     R.string.long_htg, R.drawable.flag_ht),
+        new Specie("CUP", "₱",    R.string.long_cup, R.drawable.flag_cu),
+        new Specie("DKK", "kr",   R.string.long_dkk, R.drawable.flag_dk),
+        new Specie("JOD", "",     R.string.long_jod, R.drawable.flag_jo),
+        new Specie("BGN", "лв",   R.string.long_bgn, R.drawable.flag_bg),
+        new Specie("VND", "₫",    R.string.long_vnd, R.drawable.flag_vn),
+        new Specie("UZS", "лв",   R.string.long_uzs, R.drawable.flag_uz),
     };
 
-    // Specie symbols
-    public static final String SPECIE_SYMBOLS[] =
+    public static int specieIndex(String name)
     {
-        "€", "$", "£", "¥", "$", "", "$", "$", "", "", "﷼", "₨", "zł", "S/.",
-        "", "", "", "Lek", "₨", "RD$", "$", "kn", "", "$", "Gs", "$", "", "",
-        "S", "ƒ", "₨", "₩", "₼", "₡", "J$", "", "", "", "£", "$", "R", "лв",
-        "", "$", "", "", "KM", "₹", "", "NT$", "", "", "$", "", "Q", "£",
-        "Ft", "₦", "﷼", "ден", "", "", "", "kr", "₨", "kr", "£", "₾", "$",
-        "BZ$", "", "", "", "", "₱", "₪", "", "$b", "$", "", "MT", "", "¥",
-        "﷼", "RM", "лв", "؋", "$", "£", "", "", "Rp", "", "", "", "", "", "₭",
-        "P", "", "Kč", "", "₴", "", "ƒ", "", "៛", "kr", "", "lei", "", "Дин.",
-        "$", "", "L", "₨", "", "﷼", "₽", "", "$", "$U", "$", "", "", "", "$",
-        "", "﷼", "$", "", "C$", "$", "", "", "₮", "R$", "$", "฿", "", "",
-        "B/.", "TT$", "", "₱", "kr", "", "лв", "₫", "лв",
-    };
-
-    // Specie long names
-    public static final Integer SPECIE_LONGNAMES[] =
-    {
-        R.string.long_eur, R.string.long_usd, R.string.long_gbp,
-        R.string.long_jpy, R.string.long_aud, R.string.long_chf,
-        R.string.long_cad, R.string.long_svc, R.string.long_cve,
-        R.string.long_zmw, R.string.long_yer, R.string.long_lkr,
-        R.string.long_pln, R.string.long_pen, R.string.long_iqd,
-        R.string.long_stn, R.string.long_xpf, R.string.long_all,
-        R.string.long_mur, R.string.long_dop, R.string.long_nzd,
-        R.string.long_hrk, R.string.long_dzd, R.string.long_ars,
-        R.string.long_pyg, R.string.long_bnd, R.string.long_kmf,
-        R.string.long_szl, R.string.long_sos, R.string.long_ang,
-        R.string.long_pkr, R.string.long_krw, R.string.long_azn,
-        R.string.long_crc, R.string.long_jmd, R.string.long_ssp,
-        R.string.long_ern, R.string.long_wst, R.string.long_egp,
-        R.string.long_sgd, R.string.long_zar, R.string.long_kgs,
-        R.string.long_mga, R.string.long_srd, R.string.long_ghs,
-        R.string.long_mop, R.string.long_bam, R.string.long_inr,
-        R.string.long_try, R.string.long_twd, R.string.long_tmt,
-        R.string.long_ves, R.string.long_sbd, R.string.long_mwk,
-        R.string.long_gtq, R.string.long_lbp, R.string.long_huf,
-        R.string.long_ngn, R.string.long_irr, R.string.long_mkd,
-        R.string.long_bif, R.string.long_mmk, R.string.long_mvr,
-        R.string.long_sek, R.string.long_npr, R.string.long_isk,
-        R.string.long_gip, R.string.long_gel, R.string.long_cop,
-        R.string.long_bzd, R.string.long_gnf, R.string.long_sll,
-        R.string.long_kes, R.string.long_aed, R.string.long_php,
-        R.string.long_ils, R.string.long_mro, R.string.long_bob,
-        R.string.long_gyd, R.string.long_rwf, R.string.long_mzn,
-        R.string.long_ugx, R.string.long_cny, R.string.long_sar,
-        R.string.long_myr, R.string.long_kzt, R.string.long_afn,
-        R.string.long_nad, R.string.long_syp, R.string.long_top,
-        R.string.long_vuv, R.string.long_idr, R.string.long_tnd,
-        R.string.long_xof, R.string.long_tjs, R.string.long_etb,
-        R.string.long_xcd, R.string.long_lak, R.string.long_bwp,
-        R.string.long_kwd, R.string.long_czk, R.string.long_pgk,
-        R.string.long_uah, R.string.long_gmd, R.string.long_awg,
-        R.string.long_aoa, R.string.long_khr, R.string.long_nok,
-        R.string.long_mad, R.string.long_ron, R.string.long_byn,
-        R.string.long_rsd, R.string.long_bsd, R.string.long_djf,
-        R.string.long_hnl, R.string.long_scr, R.string.long_bhd,
-        R.string.long_omr, R.string.long_rub, R.string.long_lyd,
-        R.string.long_clp, R.string.long_uyu, R.string.long_fjd,
-        R.string.long_cdf, R.string.long_lsl, R.string.long_tzs,
-        R.string.long_bbd, R.string.long_bdt, R.string.long_qar,
-        R.string.long_mxn, R.string.long_amd, R.string.long_nio,
-        R.string.long_lrd, R.string.long_sdg, R.string.long_mru,
-        R.string.long_mnt, R.string.long_brl, R.string.long_hkd,
-        R.string.long_thb, R.string.long_xaf, R.string.long_mdl,
-        R.string.long_pab, R.string.long_ttd, R.string.long_htg,
-        R.string.long_cup, R.string.long_dkk, R.string.long_jod,
-        R.string.long_bgn, R.string.long_vnd, R.string.long_uzs
-    };
-
-    // Specie flags
-    public static final Integer SPECIE_FLAGS[] =
-    {
-        R.drawable.flag_eu, R.drawable.flag_us, R.drawable.flag_gb,
-        R.drawable.flag_jp, R.drawable.flag_au, R.drawable.flag_ch,
-        R.drawable.flag_ca, R.drawable.flag_sv, R.drawable.flag_cv,
-        R.drawable.flag_zm, R.drawable.flag_ye, R.drawable.flag_lk,
-        R.drawable.flag_pl, R.drawable.flag_pe, R.drawable.flag_iq,
-        R.drawable.flag_st, R.drawable.flag_pf, R.drawable.flag_al,
-        R.drawable.flag_mu, R.drawable.flag_do, R.drawable.flag_nz,
-        R.drawable.flag_hr, R.drawable.flag_dz, R.drawable.flag_ar,
-        R.drawable.flag_py, R.drawable.flag_bn, R.drawable.flag_km,
-        R.drawable.flag_sz, R.drawable.flag_so, R.drawable.flag_cw,
-        R.drawable.flag_pk, R.drawable.flag_kr, R.drawable.flag_az,
-        R.drawable.flag_cr, R.drawable.flag_jm, R.drawable.flag_ss,
-        R.drawable.flag_er, R.drawable.flag_ws, R.drawable.flag_eg,
-        R.drawable.flag_sg, R.drawable.flag_za, R.drawable.flag_kg,
-        R.drawable.flag_mg, R.drawable.flag_sr, R.drawable.flag_gh,
-        R.drawable.flag_mo, R.drawable.flag_ba, R.drawable.flag_in,
-        R.drawable.flag_tr, R.drawable.flag_tw, R.drawable.flag_tm,
-        R.drawable.flag_ve, R.drawable.flag_sb, R.drawable.flag_mw,
-        R.drawable.flag_gt, R.drawable.flag_lb, R.drawable.flag_hu,
-        R.drawable.flag_ng, R.drawable.flag_ir, R.drawable.flag_mk,
-        R.drawable.flag_bi, R.drawable.flag_mm, R.drawable.flag_mv,
-        R.drawable.flag_se, R.drawable.flag_np, R.drawable.flag_is,
-        R.drawable.flag_gi, R.drawable.flag_ge, R.drawable.flag_co,
-        R.drawable.flag_bz, R.drawable.flag_gn, R.drawable.flag_sl,
-        R.drawable.flag_ke, R.drawable.flag_ae, R.drawable.flag_ph,
-        R.drawable.flag_il, R.drawable.flag_mr, R.drawable.flag_bo,
-        R.drawable.flag_gy, R.drawable.flag_rw, R.drawable.flag_mz,
-        R.drawable.flag_ug, R.drawable.flag_cn, R.drawable.flag_sa,
-        R.drawable.flag_my, R.drawable.flag_kz, R.drawable.flag_af,
-        R.drawable.flag_na, R.drawable.flag_sy, R.drawable.flag_to,
-        R.drawable.flag_vu, R.drawable.flag_id, R.drawable.flag_tn,
-        R.drawable.flag_be, R.drawable.flag_tj, R.drawable.flag_et,
-        R.drawable.flag_ag, R.drawable.flag_la, R.drawable.flag_bw,
-        R.drawable.flag_kw, R.drawable.flag_cz, R.drawable.flag_pg,
-        R.drawable.flag_ua, R.drawable.flag_gm, R.drawable.flag_aw,
-        R.drawable.flag_ao, R.drawable.flag_kh, R.drawable.flag_no,
-        R.drawable.flag_ma, R.drawable.flag_ro, R.drawable.flag_by,
-        R.drawable.flag_rs, R.drawable.flag_bs, R.drawable.flag_dj,
-        R.drawable.flag_hn, R.drawable.flag_sc, R.drawable.flag_bh,
-        R.drawable.flag_om, R.drawable.flag_ru, R.drawable.flag_ly,
-        R.drawable.flag_cl, R.drawable.flag_uy, R.drawable.flag_fj,
-        R.drawable.flag_cd, R.drawable.flag_ls, R.drawable.flag_tz,
-        R.drawable.flag_bb, R.drawable.flag_bd, R.drawable.flag_qa,
-        R.drawable.flag_mx, R.drawable.flag_am, R.drawable.flag_ni,
-        R.drawable.flag_lr, R.drawable.flag_sd, R.drawable.flag_mr,
-        R.drawable.flag_mn, R.drawable.flag_br, R.drawable.flag_hk,
-        R.drawable.flag_th, R.drawable.flag_cm, R.drawable.flag_md,
-        R.drawable.flag_pa, R.drawable.flag_tt, R.drawable.flag_ht,
-        R.drawable.flag_cu, R.drawable.flag_dk, R.drawable.flag_jo,
-        R.drawable.flag_bg, R.drawable.flag_vn, R.drawable.flag_uz
-    };
+        for (int i = 0; i < SPECIES.length; i++)
+        {
+            if (SPECIES[i].name.equals(name))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     public static final String TAG = "Specie";
 
@@ -290,8 +326,6 @@ public class Main extends Activity
     private TextView statusView;
 
     private Data data;
-
-    private List<String> specieNameList;
 
     private List<Integer> flagList;
     private List<String> nameList;
@@ -364,9 +398,6 @@ public class Main extends Activity
             listView.setOnItemLongClickListener(this);
         }
 
-        // Create specie name list
-        specieNameList = Arrays.asList(SPECIE_NAMES);
-
         // Create lists
         flagList = new ArrayList<>();
         nameList = new ArrayList<>();
@@ -425,7 +456,7 @@ public class Main extends Activity
         // Get current specie
         currentIndex = preferences.getInt(PREF_INDEX, -1);
         if (currentIndex == -1) {
-            currentIndex = currencyIndex(DEFAULT_SPECIE);
+            currentIndex = specieIndex(DEFAULT_SPECIE);
         }
 
         // Get widget entry
@@ -459,13 +490,13 @@ public class Main extends Activity
 
         // Set current specie flag and names
         if (flagView != null)
-            flagView.setImageResource(SPECIE_FLAGS[currentIndex]);
+            flagView.setImageResource(SPECIES[currentIndex].flag);
         if (nameView != null)
-            nameView.setText(SPECIE_NAMES[currentIndex]);
+            nameView.setText(SPECIES[currentIndex].name);
         if (symbolView != null)
-            symbolView.setText(SPECIE_SYMBOLS[currentIndex]);
+            symbolView.setText(SPECIES[currentIndex].symbol);
         if (longNameView != null)
-            longNameView.setText(SPECIE_LONGNAMES[currentIndex]);
+            longNameView.setText(SPECIES[currentIndex].longname);
 
         // Set current value
         numberFormat.setGroupingUsed(false);
@@ -618,8 +649,8 @@ public class Main extends Activity
         }
 
         // Get the current conversion rate
-        convertValue = valueMap.containsKey(SPECIE_NAMES[currentIndex])?
-            valueMap.get(SPECIE_NAMES[currentIndex]): Double.NaN;
+        convertValue = valueMap.containsKey(SPECIES[currentIndex].name)?
+            valueMap.get(SPECIES[currentIndex].name): Double.NaN;
 
         // Recalculate all the values
         valueList.clear();
@@ -651,14 +682,14 @@ public class Main extends Activity
         // Populate the lists
         for (String name : nameList)
         {
-            int index = specieNameList.indexOf(name);
+            int index = specieIndex(name);
 
             if (flagList != null)
-                flagList.add(SPECIE_FLAGS[index]);
+                flagList.add(SPECIES[index].flag);
             if (symbolList != null)
-                symbolList.add(SPECIE_SYMBOLS[index]);
+                symbolList.add(SPECIES[index].symbol);
             if (longNameList != null)
-                longNameList.add(SPECIE_LONGNAMES[index]);
+                longNameList.add(SPECIES[index].longname);
         }
 
         // Update the adapter
@@ -853,8 +884,8 @@ public class Main extends Activity
 
             String entryName = nameList.get(widgetEntry);
             String entryValue = valueList.get(widgetEntry);
-            int entryIndex = specieNameList.indexOf(entryName);
-            String longName = getString(SPECIE_LONGNAMES[entryIndex]);
+            int entryIndex = specieIndex(entryName);
+            String longName = getString(SPECIES[entryIndex].longname);
 
             // Create an Intent to launch Specie
             Intent intent = new Intent(this, Main.class);
@@ -879,14 +910,14 @@ public class Main extends Activity
             views.setOnClickPendingIntent(R.id.config, configIntent);
 
             views.setTextViewText(R.id.current_name,
-                                  SPECIE_NAMES[currentIndex]);
+                                  SPECIES[currentIndex].name);
             views.setTextViewText(R.id.current_symbol,
-                                  SPECIE_SYMBOLS[currentIndex]);
+                                  SPECIES[currentIndex].symbol);
             views.setTextViewText(R.id.current_value, value);
 
-            views.setImageViewResource(R.id.flag, SPECIE_FLAGS[entryIndex]);
+            views.setImageViewResource(R.id.flag, SPECIES[entryIndex].flag);
             views.setTextViewText(R.id.name, entryName);
-            views.setTextViewText(R.id.symbol, SPECIE_SYMBOLS[entryIndex]);
+            views.setTextViewText(R.id.symbol, SPECIES[entryIndex].symbol);
             views.setTextViewText(R.id.value, entryValue);
             views.setTextViewText(R.id.long_name, longName);
 
@@ -1254,12 +1285,12 @@ public class Main extends Activity
             oldValue = currentValue;
 
             // Set the current specie from the list
-            currentIndex = specieNameList.indexOf(nameList.get(position));
+            currentIndex = specieIndex(nameList.get(position));
 
             try
             {
                 currentValue = (oldValue / convertValue) *
-                    valueMap.get(SPECIE_NAMES[currentIndex]);
+                    valueMap.get(SPECIES[currentIndex].name);
             }
 
             catch (Exception e)
@@ -1267,8 +1298,8 @@ public class Main extends Activity
                 currentValue = Double.NaN;
             }
 
-            convertValue = valueMap.containsKey(SPECIE_NAMES[currentIndex])?
-                valueMap.get(SPECIE_NAMES[currentIndex]): Double.NaN;
+            convertValue = valueMap.containsKey(SPECIES[currentIndex].name)?
+                valueMap.get(SPECIES[currentIndex].name): Double.NaN;
 
             numberFormat.setGroupingUsed(false);
             value = numberFormat.format(currentValue);
@@ -1286,13 +1317,13 @@ public class Main extends Activity
             }
 
             if (flagView != null)
-                flagView.setImageResource(SPECIE_FLAGS[currentIndex]);
+                flagView.setImageResource(SPECIES[currentIndex].flag);
             if (nameView != null)
-                nameView.setText(SPECIE_NAMES[currentIndex]);
+                nameView.setText(SPECIES[currentIndex].name);
             if (symbolView != null)
-                symbolView.setText(SPECIE_SYMBOLS[currentIndex]);
+                symbolView.setText(SPECIES[currentIndex].symbol);
             if (longNameView != null)
-                longNameView.setText(SPECIE_LONGNAMES[currentIndex]);
+                longNameView.setText(SPECIES[currentIndex].longname);
 
             // Remove the selected specie from the lists
             flagList.remove(position);
@@ -1302,10 +1333,10 @@ public class Main extends Activity
             longNameList.remove(position);
 
             // Add the old current specie to the start of the list
-            flagList.add(0, SPECIE_FLAGS[oldIndex]);
-            nameList.add(0, SPECIE_NAMES[oldIndex]);
-            symbolList.add(0, SPECIE_SYMBOLS[oldIndex]);
-            longNameList.add(0, SPECIE_LONGNAMES[oldIndex]);
+            flagList.add(0, SPECIES[oldIndex].flag);
+            nameList.add(0, SPECIES[oldIndex].name);
+            symbolList.add(0, SPECIES[oldIndex].symbol);
+            longNameList.add(0, SPECIES[oldIndex].longname);
 
             numberFormat.setGroupingUsed(true);
             value = numberFormat.format(oldValue);
@@ -1395,21 +1426,21 @@ public class Main extends Activity
         {
             // Don't add duplicates or currencies not available
             if ((currentIndex == index) ||
-                nameList.contains(SPECIE_NAMES[index]) ||
-                !valueMap.containsKey(SPECIE_NAMES[index]))
+                nameList.contains(SPECIES[index].name) ||
+                !valueMap.containsKey(SPECIES[index].name))
                 continue;
 
-            flagList.add(SPECIE_FLAGS[index]);
-            nameList.add(SPECIE_NAMES[index]);
-            symbolList.add(SPECIE_SYMBOLS[index]);
-            longNameList.add(SPECIE_LONGNAMES[index]);
+            flagList.add(SPECIES[index].flag);
+            nameList.add(SPECIES[index].name);
+            symbolList.add(SPECIES[index].symbol);
+            longNameList.add(SPECIES[index].longname);
 
             Double value = 1.0;
 
             try
             {
                 value = (currentValue / convertValue) *
-                    valueMap.get(SPECIE_NAMES[index]);
+                    valueMap.get(SPECIES[index].name);
             }
 
             catch (Exception e) {}
@@ -1482,8 +1513,8 @@ public class Main extends Activity
             valueList.clear();
 
             // Get the convert value
-            convertValue = valueMap.containsKey(SPECIE_NAMES[currentIndex])?
-                valueMap.get(SPECIE_NAMES[currentIndex]): Double.NaN;
+            convertValue = valueMap.containsKey(SPECIES[currentIndex].name)?
+                valueMap.get(SPECIES[currentIndex].name): Double.NaN;
 
             // Populate a new value list
             NumberFormat numberFormat = NumberFormat.getInstance();
