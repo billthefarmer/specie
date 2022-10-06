@@ -42,7 +42,6 @@ public class ChoiceAdapter extends BaseAdapter
     private List<Integer> longNames;
     private List<Integer> selection;
     private List<String> names;
-    private List<String> symbols;
 
     private int resource;
 
