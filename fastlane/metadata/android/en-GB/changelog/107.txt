@@ -1,2 +1,2 @@
  * Sort select dialog currency list
- * Add sort widget
+ * Add search widget
