@@ -264,12 +264,9 @@ public class Main extends Activity
     public static int specieIndex(String name)
     {
         for (int i = 0; i < SPECIES.length; i++)
-        {
             if (SPECIES[i].name.equals(name))
-            {
                 return i;
-            }
-        }
+
         return -1;
     }
 
@@ -453,10 +450,8 @@ public class Main extends Activity
             recreate();
 
         // Get current specie
-        currentIndex = preferences.getInt(PREF_INDEX, -1);
-        if (currentIndex == -1) {
-            currentIndex = specieIndex(DEFAULT_SPECIE);
-        }
+        currentIndex = preferences.getInt
+            (PREF_INDEX, specieIndex(DEFAULT_SPECIE));
 
         // Get widget entry
         widgetEntry = Integer.parseInt(preferences.getString(PREF_ENTRY, "0"));
@@ -1286,34 +1281,8 @@ public class Main extends Activity
             // Set the current specie from the list
             currentIndex = specieIndex(nameList.get(position));
 
-            try
-            {
-                currentValue = (oldValue / convertValue) *
-                    valueMap.get(SPECIES[currentIndex].name);
-            }
-
-            catch (Exception e)
-            {
-                currentValue = Double.NaN;
-            }
-
             convertValue = valueMap.containsKey(SPECIES[currentIndex].name)?
                 valueMap.get(SPECIES[currentIndex].name): Double.NaN;
-
-            numberFormat.setGroupingUsed(false);
-            value = numberFormat.format(currentValue);
-
-            if (editView != null)
-            {
-                editView.setText(value);
-
-                // Forces select all
-                editView.clearFocus();
-                editView.requestFocus();
-
-                // Do it only once
-                select = false;
-            }
 
             if (flagView != null)
                 flagView.setImageResource(SPECIES[currentIndex].flag);
@@ -1340,6 +1309,21 @@ public class Main extends Activity
             numberFormat.setGroupingUsed(true);
             value = numberFormat.format(oldValue);
             valueList.add(0, value);
+
+            numberFormat.setGroupingUsed(false);
+            value = numberFormat.format(currentValue);
+
+            if (editView != null)
+            {
+                editView.setText(value);
+
+                // Forces select all
+                editView.clearFocus();
+                editView.requestFocus();
+
+                // Do it only once
+                select = false;
+            }
 
             // Get preferences
             SharedPreferences preferences =
