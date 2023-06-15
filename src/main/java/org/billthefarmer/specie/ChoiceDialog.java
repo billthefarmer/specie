@@ -26,6 +26,7 @@ package org.billthefarmer.specie;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -64,10 +65,34 @@ public class ChoiceDialog extends Activity
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
 
-        boolean theme = preferences.getBoolean(Main.PREF_DARK, true);
+        int theme = Integer.parseInt(preferences.getString(Main.PREF_THEME, "0"));
 
-        if (!theme)
+        Configuration config = getResources().getConfiguration();
+        int night = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        switch (theme)
+        {
+        case Main.LIGHT:
             setTheme(R.style.DialogLightTheme);
+            break;
+
+        case Main.DARK:
+            setTheme(R.style.DialogTheme);
+            break;
+
+        case Main.SYSTEM:
+            switch (night)
+            {
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.DialogLightTheme);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.DialogTheme);
+                break;
+            }
+            break;
+        }
 
         setContentView(R.layout.choose);
 
