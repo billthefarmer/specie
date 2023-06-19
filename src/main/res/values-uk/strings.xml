@@ -55,8 +55,6 @@
   <string name="pref_numbers">Числа</string>
   <string name="pref_digits">Дробові цифри</string>
   <string name="pref_digit_default">3</string>
-  <string name="pref_dark">Темно</string>
-  <string name="pref_dark_summ">Використовуйте темну тему</string>
 
   <string name="long_aud">Австралійський долар</string>
   <string name="long_bgn">Болгарський лев</string>

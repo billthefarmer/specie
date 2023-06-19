@@ -62,8 +62,6 @@
   <string name="pref_numbers">Tall</string>
   <string name="pref_digits">Desimaler</string>
   <string name="pref_digit_default">3</string>
-  <string name="pref_dark">Mørkt</string>
-  <string name="pref_dark_summ">Bruk mørkt tema</string>
 
   <string name="long_aud">Australske dollar</string>
   <string name="long_bgn">Bulgarske lev</string>

@@ -50,8 +50,6 @@
   <string name="pref_numbers">Числа</string>
   <string name="pref_digits">Точность дробной части числа</string>
   <string name="pref_digit_default">2</string>
-  <string name="pref_dark">Тёмная</string>
-  <string name="pref_dark_summ">Использовать тёмную тему</string>
 
   <string name="long_aud">Австралийский доллар</string>
   <string name="long_bgn">Болгарский лев</string>

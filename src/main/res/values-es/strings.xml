@@ -54,8 +54,6 @@
   <string name="pref_numbers">Números</string>
   <string name="pref_digits">Decimales</string>
   <string name="pref_digit_default">3</string>
-  <string name="pref_dark">Oscuro</string>
-  <string name="pref_dark_summ">Utilizar tema oscuro</string>
 
   <string name="long_aud">Dólar Australiano</string>
   <string name="long_bgn">Lev Búlgaro</string>
