@@ -31,6 +31,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -45,6 +46,8 @@ import org.json.JSONArray;
 // SpecieWidgetConfigure
 public class SpecieWidgetConfigure extends Activity
 {
+    public static final String TAG = "SpecieWidgetConfigure";
+
     // On create
     @Override
     public void onCreate(Bundle savedInstanceState)

@@ -23,13 +23,13 @@
 
 package org.billthefarmer.specie;
 
-import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -57,7 +57,6 @@ public class SpecieWidgetProvider extends AppWidgetProvider
 
     // onUpdate
     @Override
-    @SuppressLint("InlinedApi")
     @SuppressWarnings("deprecation")
     public void onUpdate(Context context,
                          AppWidgetManager appWidgetManager,
@@ -190,6 +189,7 @@ public class SpecieWidgetProvider extends AppWidgetProvider
 
             // Create an Intent to launch Specie
             Intent intent = new Intent(context, Main.class);
+            //noinspection InlinedApi
             PendingIntent pendingIntent =
                 PendingIntent.getActivity(context, 0, intent,
                                           PendingIntent.FLAG_UPDATE_CURRENT |
@@ -198,6 +198,11 @@ public class SpecieWidgetProvider extends AppWidgetProvider
             // Create an Intent to configure widget
             Intent config = new Intent(context, SpecieWidgetConfigure.class);
             config.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            // This bit of jiggery hackery is to force the system to
+            // keep a different intent for each widget
+            Uri uri = Uri.parse(Main.WIDGET + String.valueOf(appWidgetId));
+            config.setData(uri);
+            //noinspection InlinedApi
             PendingIntent configIntent =
                 PendingIntent.getActivity(context, 0, config,
                                           PendingIntent.FLAG_UPDATE_CURRENT |
