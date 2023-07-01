@@ -1093,6 +1093,9 @@ public class Main extends Activity
         if (statusView != null)
             statusView.setText(R.string.updating);
 
+        // Get data instance
+        data = Data.getInstance(this);
+
         // Start the task
         if (data != null)
             data.startParseTask(DAILY_URL);

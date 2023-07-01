@@ -30,6 +30,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -62,6 +63,9 @@ public class SpecieWidgetProvider extends AppWidgetProvider
                          AppWidgetManager appWidgetManager,
                          int[] appWidgetIds)
     {
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "onUpdate " + context);
+
         // Get preferences
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(context);
@@ -182,6 +186,9 @@ public class SpecieWidgetProvider extends AppWidgetProvider
             if (widgetEntry >= nameList.size())
                 widgetEntry = 0;
 
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Id " + appWidgetId + ", " + widgetEntry);
+
             String entryName = nameList.get(widgetEntry);
             String entryValue = valueList.get(widgetEntry);
             int entryIndex = Main.specieIndex(entryName);
@@ -194,7 +201,6 @@ public class SpecieWidgetProvider extends AppWidgetProvider
                 PendingIntent.getActivity(context, 0, intent,
                                           PendingIntent.FLAG_UPDATE_CURRENT |
                                           PendingIntent.FLAG_IMMUTABLE);
-
             // Create an Intent to configure widget
             Intent config = new Intent(context, SpecieWidgetConfigure.class);
             config.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -234,9 +240,22 @@ public class SpecieWidgetProvider extends AppWidgetProvider
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
 
-        // Start update
-        Intent update = new Intent(context, SpecieWidgetUpdate.class);
-        context.startService(update);
+        // Start dispatch, won't work on android 10+
+        try
+        {
+            Intent dispatch = new Intent(context, SpecieWidgetDispatch.class);
+            dispatch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(dispatch);
+
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Dispatch " + dispatch);
+        }
+
+        catch (Exception e)
+        {
+            if (BuildConfig.DEBUG)
+                Log.d(TAG, "Dispatch " + e);
+        }
     }
 
     @Override

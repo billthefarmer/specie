@@ -46,6 +46,15 @@
       </intent-filter>
     </activity>
 
+    <activity
+        android:name="SpecieWidgetDispatch"
+        android:excludeFromRecents="true"
+        android:noHistory="true"
+        android:theme="@android:style/Theme.NoDisplay" />
+
+    <service
+        android:name="SpecieWidgetUpdate" />
+
     <receiver
         android:name="SpecieWidgetProvider"
         android:exported="true">

@@ -29,9 +29,8 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -65,6 +64,9 @@ public class SpecieWidgetUpdate extends Service
     {
         // Get data instance
         data = Data.getInstance(this);
+
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "onCreate " + data);
     }
 
     // onStartCommand
@@ -72,33 +74,21 @@ public class SpecieWidgetUpdate extends Service
     @SuppressWarnings("deprecation")
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        // Get preferences
-        SharedPreferences preferences =
-            PreferenceManager.getDefaultSharedPreferences(this);
-
-        boolean wifi = preferences.getBoolean(Main.PREF_WIFI, true);
-        boolean roaming = preferences.getBoolean(Main.PREF_ROAMING, false);
-
-        // Check connectivity before update
-        ConnectivityManager manager =
-            (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo info = manager.getActiveNetworkInfo();
-
-        // Check connected
-        if (info == null || !info.isConnected())
-            return START_NOT_STICKY;
-
-        // Check wifi
-        if (wifi && info.getType() != ConnectivityManager.TYPE_WIFI)
-            return START_NOT_STICKY;
-
-        // Check roaming
-        if (!roaming && info.isRoaming())
-            return START_NOT_STICKY;
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "onStartCommand " + intent);
 
         // Start the task
         if (data != null)
             data.startParseTask(Main.DAILY_URL);
+
+        else
+        {
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "startParseTask");
 
         return START_NOT_STICKY;
     }
@@ -122,6 +112,9 @@ public class SpecieWidgetUpdate extends Service
     @Override
     public void onProgressUpdate(String... dates)
     {
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "onProgressUpdate " + dates[0]);
+
         SimpleDateFormat dateParser =
             new SimpleDateFormat(Main.DATE_FORMAT, Locale.getDefault());
         DateFormat dateFormat =
@@ -157,11 +150,18 @@ public class SpecieWidgetUpdate extends Service
     // The system calls this to perform work in the UI thread and
     // delivers the result from doInBackground()
     @Override
+    @SuppressWarnings("deprecation")
     public void onPostExecute(Map<String, Double> map)
     {
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "onPostExecute " + map);
+
         // Check the map
         if (map.isEmpty())
+        {
+            stopSelf();
             return;
+        }
 
         // Get preferences
         SharedPreferences preferences =
@@ -169,19 +169,8 @@ public class SpecieWidgetUpdate extends Service
 
         map.put("EUR", 1.0);
 
-        // Get editor
-        SharedPreferences.Editor editor = preferences.edit();
-
-        // Get entries
-        JSONObject mapObject = new JSONObject(map);
-
-        // Update preferences
-        editor.putString(Main.PREF_MAP, mapObject.toString());
-        editor.apply();
-
         // Get saved specie lists
         String namesJSON = preferences.getString(Main.PREF_NAMES, null);
-        String valuesJSON = preferences.getString(Main.PREF_VALUES, null);
         List<String> nameList = new ArrayList<String>();
         List<String> valueList = new ArrayList<String>();
 
@@ -213,49 +202,46 @@ public class SpecieWidgetUpdate extends Service
             nameList.addAll(Arrays.asList(Main.SPECIE_LIST));
         }
 
-        // Get the saved value list
-        if (valuesJSON != null)
-        {
-            try
-            {
-                // Update value list from JSON array
-                JSONArray valuesArray = new JSONArray(valuesJSON);
-                for (int i = 0; !valuesArray.isNull(i); i++)
-                    valueList.add(valuesArray.getString(i));
-            }
-
-            catch (Exception e) {}
-        }
-
-        // Calculate value list
-        else
-        {
-            // Format each value
-            numberFormat.setGroupingUsed(true);
-            for (String name : nameList)
-            {
-                Double v = map.get(name);
-                String value = numberFormat.format((v != null)? v: 0.0);
-
-                valueList.add(value);
-            }
-        }
-
         // Get current specie
         int currentIndex = preferences.getInt(Main.PREF_INDEX, 0);
 
-        String value = preferences.getString(Main.PREF_VALUE, "1.0");
-        String currentValue = "1.0";
-        try
+        double currentValue = Double.parseDouble(preferences.getString
+                                                 (Main.PREF_VALUE, "1.0"));
+        String stringValue = numberFormat.format(currentValue);
+
+        // Get the convert value
+        double convertValue =
+            map.containsKey(Main.SPECIES[currentIndex].name)?
+            map.get(Main.SPECIES[currentIndex].name): Double.NaN;
+
+        // Populate a new value list
+        for (String name : nameList)
         {
-            double v = Double.parseDouble(value);
-            currentValue = numberFormat.format(v);
+            try
+            {
+                Double value = (currentValue / convertValue) *
+                    map.get(name);
+
+                valueList.add(numberFormat.format(value));
+            }
+
+            catch (Exception e)
+            {
+                valueList.add(numberFormat.format(Double.NaN));
+            }
         }
 
-        catch (Exception e)
-        {
-            currentValue = "1.0";
-        }
+        // Get editor
+        SharedPreferences.Editor editor = preferences.edit();
+
+        // Get entries
+        JSONObject valueObject = new JSONObject(map);
+        JSONArray valueArray = new JSONArray(valueList);
+
+        // Update preferences
+        editor.putString(Main.PREF_MAP, valueObject.toString());
+        editor.putString(Main.PREF_VALUES, valueArray.toString());
+        editor.apply();
 
         // Get manager
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
@@ -311,7 +297,7 @@ public class SpecieWidgetUpdate extends Service
                                   Main.SPECIES[currentIndex].name);
             views.setTextViewText(R.id.current_symbol,
                                   Main.SPECIES[currentIndex].symbol);
-            views.setTextViewText(R.id.current_value, currentValue);
+            views.setTextViewText(R.id.current_value, stringValue);
 
             views.setImageViewResource(R.id.flag,
                                        Main.SPECIES[entryIndex].flag);
