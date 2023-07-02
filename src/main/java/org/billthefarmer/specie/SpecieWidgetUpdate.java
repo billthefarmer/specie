@@ -151,13 +151,13 @@ public class SpecieWidgetUpdate extends Service
     // delivers the result from doInBackground()
     @Override
     @SuppressWarnings("deprecation")
-    public void onPostExecute(Map<String, Double> map)
+    public void onPostExecute(Map<String, Double> valueMap)
     {
         if (BuildConfig.DEBUG)
-            Log.d(TAG, "onPostExecute " + map);
+            Log.d(TAG, "onPostExecute " + valueMap);
 
         // Check the map
-        if (map.isEmpty())
+        if (valueMap.isEmpty())
         {
             stopSelf();
             return;
@@ -167,7 +167,7 @@ public class SpecieWidgetUpdate extends Service
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(this);
 
-        map.put("EUR", 1.0);
+        valueMap.put("EUR", 1.0);
 
         // Get saved specie lists
         String namesJSON = preferences.getString(Main.PREF_NAMES, null);
@@ -211,8 +211,8 @@ public class SpecieWidgetUpdate extends Service
 
         // Get the convert value
         double convertValue =
-            map.containsKey(Main.SPECIES[currentIndex].name)?
-            map.get(Main.SPECIES[currentIndex].name): Double.NaN;
+            valueMap.containsKey(Main.SPECIES[currentIndex].name)?
+            valueMap.get(Main.SPECIES[currentIndex].name): Double.NaN;
 
         // Populate a new value list
         for (String name : nameList)
@@ -220,7 +220,7 @@ public class SpecieWidgetUpdate extends Service
             try
             {
                 Double value = (currentValue / convertValue) *
-                    map.get(name);
+                    valueMap.get(name);
 
                 valueList.add(numberFormat.format(value));
             }
@@ -235,7 +235,7 @@ public class SpecieWidgetUpdate extends Service
         SharedPreferences.Editor editor = preferences.edit();
 
         // Get entries
-        JSONObject valueObject = new JSONObject(map);
+        JSONObject valueObject = new JSONObject(valueMap);
         JSONArray valueArray = new JSONArray(valueList);
 
         // Update preferences
