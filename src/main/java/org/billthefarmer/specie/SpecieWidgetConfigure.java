@@ -106,11 +106,12 @@ public class SpecieWidgetConfigure extends Activity
             editor.putInt(String.valueOf(appWidgetId), position);
             editor.apply();
 
-            AppWidgetManager appWidgetManager =
-                AppWidgetManager.getInstance(this);
-            SpecieWidgetProvider provider = new SpecieWidgetProvider();
+            Intent broadcast = new Intent
+                (AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             int appWidgetIds[] = {appWidgetId};
-            provider.onUpdate(this, appWidgetManager, appWidgetIds);
+            broadcast.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,
+                               appWidgetIds);
+            sendBroadcast(broadcast);
 
             Intent result = new Intent();
             result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
