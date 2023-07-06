@@ -76,6 +76,7 @@ import java.util.Locale;
 import java.util.Map;
 
 // Main class
+@SuppressWarnings("deprecation")
 public class Main extends Activity
     implements EditText.OnEditorActionListener,
     AdapterView.OnItemClickListener,
@@ -344,6 +345,7 @@ public class Main extends Activity
 
     // On create
     @Override
+    @SuppressWarnings("deprecation")
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);

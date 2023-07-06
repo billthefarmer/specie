@@ -51,6 +51,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+// SpecieWidgetUpdate
+@SuppressWarnings("deprecation")
 public class SpecieWidgetUpdate extends Service
     implements Data.TaskCallbacks
 {

@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 // Data class
+@SuppressWarnings("deprecation")
 public class Data
 {
     private static Data instance;

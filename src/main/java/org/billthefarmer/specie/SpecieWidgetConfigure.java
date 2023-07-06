@@ -44,6 +44,7 @@ import java.util.List;
 import org.json.JSONArray;
 
 // SpecieWidgetConfigure
+@SuppressWarnings("deprecation")
 public class SpecieWidgetConfigure extends Activity
 {
     public static final String TAG = "SpecieWidgetConfigure";

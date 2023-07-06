@@ -54,6 +54,8 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+// SpecieWidgetProvider
+@SuppressWarnings("deprecation")
 public class SpecieWidgetProvider extends AppWidgetProvider
 {
     public static final String TAG = "SpecieWidgetProvider";
