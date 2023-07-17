@@ -205,6 +205,13 @@ public class SpecieWidgetProvider extends AppWidgetProvider
                 PendingIntent.getActivity(context, 0, intent,
                                           PendingIntent.FLAG_UPDATE_CURRENT |
                                           PendingIntent.FLAG_IMMUTABLE);
+            // Create an Intent to refresh widgets
+            Intent refresh = new Intent(context, SpecieWidgetUpdate.class);
+            //noinspection InlinedApi
+            PendingIntent refreshIntent =
+                PendingIntent.getService(context, 0, refresh,
+                                         PendingIntent.FLAG_UPDATE_CURRENT |
+                                         PendingIntent.FLAG_IMMUTABLE);
             // Create an Intent to configure widget
             Intent config = new Intent(context, SpecieWidgetConfigure.class);
             config.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -223,6 +230,7 @@ public class SpecieWidgetProvider extends AppWidgetProvider
 
             // Attach an on-click listener to the view.
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);
+            views.setOnClickPendingIntent(R.id.refresh, refreshIntent);
             views.setOnClickPendingIntent(R.id.config, configIntent);
 
             views.setTextViewText(R.id.current_name,

@@ -36,7 +36,7 @@ public class Data
 
     private Map<String, Double> map;
     private List<Integer> list;
-
+    private ParseTask parseTask;
     private static TaskCallbacks callbacks;
 
     // Constructor
@@ -79,9 +79,21 @@ public class Data
     }
 
     // startParseTask
-    protected static void startParseTask(String url)
+    protected void startParseTask(String url)
     {
-        ParseTask parseTask = new ParseTask();
+        if (parseTask != null)
+        {
+            AsyncTask.Status status = parseTask.getStatus();
+            switch (status)
+            {
+            case PENDING:
+            case RUNNING:
+                return;
+            case FINISHED:
+            }
+        }
+
+        parseTask = new ParseTask();
         parseTask.execute(url);
     }
 

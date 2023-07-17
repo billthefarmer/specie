@@ -268,6 +268,13 @@ public class SpecieWidgetUpdate extends Service
             String longName = getString
                 (Main.SPECIES[entryIndex].longname);
 
+            // Create an Intent to refresh widget
+            Intent refresh = new Intent(this, SpecieWidgetUpdate.class);
+            //noinspection InlinedApi
+            PendingIntent refreshIntent =
+                PendingIntent.getService(this, 0, refresh,
+                                         PendingIntent.FLAG_UPDATE_CURRENT |
+                                         PendingIntent.FLAG_IMMUTABLE);
             // Create an Intent to configure widget
             Intent config = new Intent(this, SpecieWidgetConfigure.class);
             config.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -294,6 +301,7 @@ public class SpecieWidgetUpdate extends Service
             // Attach an on-click listener to the view.
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);
             views.setOnClickPendingIntent(R.id.config, configIntent);
+            views.setOnClickPendingIntent(R.id.refresh, refreshIntent);
 
             views.setTextViewText(R.id.current_name,
                                   Main.SPECIES[currentIndex].name);
