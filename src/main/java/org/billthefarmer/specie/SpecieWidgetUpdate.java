@@ -62,9 +62,11 @@ public class SpecieWidgetUpdate extends Service
     public static final String EXTRA_UPDATE_DONE =
         "org.billthefarmer.specie.EXTRA_UPDATE_DONE";
 
-    public static final int DELAY = 5000;
+    public static final int RESET_DELAY = 5 * 1000;
+    public static final int UPDATE_DELAY = 2 * 60 * 60 * 1000;
 
     private Data data;
+    private Handler handler;
 
     // onCreate
     @Override
@@ -72,6 +74,9 @@ public class SpecieWidgetUpdate extends Service
     {
         // Get data instance
         data = Data.getInstance(this);
+
+        // Get handler
+        handler = new Handler(Looper.getMainLooper());
 
         if (BuildConfig.DEBUG)
             Log.d(TAG, "onCreate " + data);
@@ -85,6 +90,14 @@ public class SpecieWidgetUpdate extends Service
         if (BuildConfig.DEBUG)
             Log.d(TAG, "onStartCommand " + intent);
 
+        startUpdate();
+
+        return START_NOT_STICKY;
+    }
+
+    // startUpdate
+    private void startUpdate()
+    {
         // Start the task
         if (data != null)
             data.startParseTask(Main.DAILY_URL);
@@ -92,7 +105,7 @@ public class SpecieWidgetUpdate extends Service
         else
         {
             stopSelf();
-            return START_NOT_STICKY;
+            return;
         }
 
         if (BuildConfig.DEBUG)
@@ -111,17 +124,12 @@ public class SpecieWidgetUpdate extends Service
 
         int appWidgetIds[] = appWidgetManager.getAppWidgetIds(provider);
         appWidgetManager.partiallyUpdateAppWidget(appWidgetIds, views);
-
-        // Get handler
-        Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() ->
         {
             views.setViewVisibility(R.id.refresh, View.VISIBLE);
             views.setViewVisibility(R.id.progress, View.INVISIBLE);
             appWidgetManager.partiallyUpdateAppWidget(appWidgetIds, views);
-        }, DELAY);
-
-        return START_NOT_STICKY;
+        }, RESET_DELAY);
     }
 
     // onBind
@@ -288,6 +296,11 @@ public class SpecieWidgetUpdate extends Service
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Broadcast " + broadcast);
 
-        stopSelf();
+        // Update for android 10+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            handler.postDelayed(() -> startUpdate(), UPDATE_DELAY);
+
+        else
+            stopSelf();
     }
 }
