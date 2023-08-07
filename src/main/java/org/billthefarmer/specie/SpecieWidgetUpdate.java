@@ -63,7 +63,6 @@ public class SpecieWidgetUpdate extends Service
         "org.billthefarmer.specie.EXTRA_UPDATE_DONE";
 
     public static final int RESET_DELAY = 5 * 1000;
-    public static final int UPDATE_DELAY = 2 * 60 * 60 * 1000;
 
     private Data data;
     private Handler handler;
@@ -296,11 +295,6 @@ public class SpecieWidgetUpdate extends Service
         if (BuildConfig.DEBUG)
             Log.d(TAG, "Broadcast " + broadcast);
 
-        // Update for android 10+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-            handler.postDelayed(() -> startUpdate(), UPDATE_DELAY);
-
-        else
-            stopSelf();
+        stopSelf();
     }
 }
