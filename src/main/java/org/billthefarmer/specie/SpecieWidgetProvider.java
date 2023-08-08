@@ -222,12 +222,12 @@ public class SpecieWidgetProvider extends AppWidgetProvider
                                           PendingIntent.FLAG_UPDATE_CURRENT |
                                           PendingIntent.FLAG_IMMUTABLE);
             // Create an Intent to refresh widgets
-            Intent refresh = new Intent(context, SpecieWidgetUpdate.class);
+            Intent refresh = new Intent(context, SpecieWidgetRefresh.class);
             //noinspection InlinedApi
             PendingIntent refreshIntent =
-                PendingIntent.getService(context, 0, refresh,
-                                         PendingIntent.FLAG_UPDATE_CURRENT |
-                                         PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent.getActivity(context, 0, refresh,
+                                          PendingIntent.FLAG_UPDATE_CURRENT |
+                                          PendingIntent.FLAG_IMMUTABLE);
             // Create an Intent to configure widget
             Intent config = new Intent(context, SpecieWidgetConfigure.class);
             config.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

@@ -46,6 +46,10 @@
       </intent-filter>
     </activity>
 
+    <activity
+        android:name="SpecieWidgetRefresh"
+        android:theme="@android:style/Theme.NoDisplay" />
+
     <service
         android:name="SpecieWidgetUpdate" />
 
