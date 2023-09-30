@@ -26,7 +26,6 @@ package org.billthefarmer.specie;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -53,13 +52,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RemoteViews;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -81,6 +82,7 @@ public class Main extends Activity
     implements EditText.OnEditorActionListener,
     AdapterView.OnItemClickListener,
     AdapterView.OnItemLongClickListener,
+    PopupMenu.OnMenuItemClickListener,
     View.OnClickListener, TextWatcher,
     Data.TaskCallbacks
 {
@@ -327,6 +329,7 @@ public class Main extends Activity
     private TextView longNameView;
     private TextView dateView;
     private TextView statusView;
+    private Toolbar toolbar;
 
     private Data data;
 
@@ -387,6 +390,20 @@ public class Main extends Activity
 
         // Get data instance
         data = Data.getInstance(this);
+
+        // Find toolbar
+        ViewGroup root = (ViewGroup) getWindow().getDecorView();
+        toolbar = findToolbar(root);
+
+        // Set up navigation
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_36dp);
+        toolbar.setNavigationOnClickListener((v) ->
+        {
+            PopupMenu popup = new PopupMenu(this, v);
+            popup.inflate(R.menu.navigation);
+            popup.setOnMenuItemClickListener(this);
+            popup.show();
+        });
 
         // Find views
         flagView = findViewById(R.id.flag);
@@ -879,6 +896,48 @@ public class Main extends Activity
         }
 
         return false;
+    }
+
+    // onMenuItemClick
+    @Override
+    public boolean onMenuItemClick(MenuItem item)
+    {
+        // Get id
+        int id = item.getItemId();
+        switch (id)
+        {
+        // Help
+        case R.id.action_help:
+            return onHelpClick();
+
+        // Settings
+        case R.id.action_settings:
+            return onSettingsClick();
+
+        default:
+            return false;
+        }
+    }
+
+    // findToolbar
+    private Toolbar findToolbar(ViewGroup group)
+    {
+        View result = null;
+        final int count = group.getChildCount();
+        for (int i = 0; i < count; i++)
+        {
+            View view = group.getChildAt(i);
+            if (view instanceof Toolbar)
+                return (Toolbar) view;
+
+            if (view instanceof ViewGroup)
+                result = findToolbar((ViewGroup) view);
+
+            if (result != null)
+                break;
+        }
+
+        return (Toolbar) result;
     }
 
     // updateWidgets
