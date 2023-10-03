@@ -53,8 +53,6 @@ The icons in the toolbar from left to right are:
   the currency list will show 'OK', 'No Connection', 'No WiFi' or
   'Roaming' according to the update settings. It may show 'Failed' if
   the connection times out or fails to connect.
-* **Help** Display help text.
-* **Settings** Display the settings screen.
 
 ### Edit currency list
 Touch a currency entry in the list to make it current. The old current
@@ -89,7 +87,7 @@ the widget with new data if available.
   decimal point. A popup list of options will be displayed.
 
 ### Theme
-* **Dark** Use dark theme
+* **Theme** Choose app theme.
 
 ### About
 * **About** Display the version, copyright and licence.
