@@ -3,13 +3,13 @@
 
   <item
       android:id="@+id/action_add"
-      android:icon="@drawable/ic_action_add"
+      android:icon="@drawable/ic_add_white_24dp"
       android:showAsAction="ifRoom"
       android:title="@string/add" />
 
   <item
       android:id="@+id/action_refresh"
-      android:icon="@drawable/ic_action_refresh"
+      android:icon="@drawable/ic_sync_white_24dp"
       android:showAsAction="ifRoom"
       android:title="@string/refresh" />
 
