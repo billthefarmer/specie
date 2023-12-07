@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <declare-styleable name="Currency">
+  <declare-styleable name="Specie">
     <attr name="pref_wifi" format="reference" />
     <attr name="pref_roaming" format="reference" />
     <attr name="pref_widget" format="reference" />
