@@ -67,6 +67,7 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -594,8 +595,9 @@ public class Main extends Activity
                 // Start the parser
                 parser.startParser(this, R.raw.euro);
 
-                DateFormat dateParser =
-                    DateFormat.getDateInstance(DateFormat.FULL);
+                // "Thu, 12 Feb 2026 19:55:17 GMT"
+                DateFormat dateParser = new
+                    SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
                 DateFormat dateFormat =
                     DateFormat.getDateInstance(DateFormat.MEDIUM);
 
@@ -610,8 +612,10 @@ public class Main extends Activity
                         Date update = dateParser.parse(latest);
                         date = dateFormat.format(update);
                     }
+
                     catch (Exception e)
                     {
+                        e.printStackTrace();
                     }
 
                     // Show the formatted date
@@ -1470,8 +1474,9 @@ public class Main extends Activity
     @Override
     public void onDateResult(String date)
     {
-        DateFormat dateParser =
-            DateFormat.getDateInstance(DateFormat.FULL);
+        // "Thu, 12 Feb 2026 19:55:17 GMT"
+        DateFormat dateParser = new
+            SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
         DateFormat dateFormat =
             DateFormat.getDateInstance(DateFormat.MEDIUM);
 
@@ -1486,6 +1491,7 @@ public class Main extends Activity
 
             catch (Exception e)
             {
+                e.printStackTrace();
             }
 
             String format = resources.getString(R.string.updated);
