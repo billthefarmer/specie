@@ -84,7 +84,7 @@ public class Main extends Activity
     AdapterView.OnItemLongClickListener,
     PopupMenu.OnMenuItemClickListener,
     View.OnClickListener, TextWatcher,
-    Data.TaskCallbacks
+    Data.OnResultListener
 {
     // Initial active specie name
     public static final String DEFAULT_SPECIE = "EUR";
@@ -787,7 +787,7 @@ public class Main extends Activity
 
         // Start the task
         if (data != null)
-            data.startParseTask(DAILY_URL);
+            data.startParse(DAILY_URL);
     }
 
     // On pause
@@ -1074,7 +1074,7 @@ public class Main extends Activity
 
         // Start the task
         if (data != null)
-            data.startParseTask(DAILY_URL);
+            data.startParse(DAILY_URL);
 
         return true;
     }
@@ -1466,9 +1466,9 @@ public class Main extends Activity
         adapter.notifyDataSetChanged();
     }
 
-    // On progress update
+    // onDateResult
     @Override
-    public void onProgressUpdate(String... dates)
+    public void onDateResult(String date)
     {
         DateFormat dateParser =
             DateFormat.getDateInstance(DateFormat.FULL);
@@ -1476,13 +1476,14 @@ public class Main extends Activity
             DateFormat.getDateInstance(DateFormat.MEDIUM);
 
         // Format the date for display
-        if (dates[0] != null)
+        if (date != null)
         {
             try
             {
-                Date update = dateParser.parse(dates[0]);
+                Date update = dateParser.parse(date);
                 this.date = dateFormat.format(update);
             }
+
             catch (Exception e)
             {
             }
@@ -1493,14 +1494,14 @@ public class Main extends Activity
             if (dateView != null)
                 dateView.setText(updated);
         }
+
         else if (statusView != null)
             statusView.setText(R.string.failed);
     }
 
-    // The system calls this to perform work in the UI thread and
-    // delivers the result from doInBackground()
+    // onDataResult
     @Override
-    public void onPostExecute(Map<String, Double> map)
+    public void onDataResult(Map<String, Double> map)
     {
         // Check the map
         if (!map.isEmpty())

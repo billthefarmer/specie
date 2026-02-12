@@ -56,13 +56,13 @@ import java.util.Map;
 // SpecieWidgetUpdate
 @SuppressWarnings("deprecation")
 public class SpecieWidgetUpdate extends Service
-    implements Data.TaskCallbacks
+    implements Data.OnResultListener
 {
     public static final String TAG = "SpecieWidgetUpdate";
     public static final String EXTRA_UPDATE_DONE =
         "org.billthefarmer.specie.EXTRA_UPDATE_DONE";
 
-    public static final int RESET_DELAY = 5 * 1000;
+    public static final int RESET_DELAY = 5000;
 
     private Data data;
     private Handler handler;
@@ -99,7 +99,7 @@ public class SpecieWidgetUpdate extends Service
     {
         // Start the task
         if (data != null)
-            data.startParseTask(Main.DAILY_URL);
+            data.startParse(Main.DAILY_URL);
 
         else
         {
@@ -108,7 +108,7 @@ public class SpecieWidgetUpdate extends Service
         }
 
         if (BuildConfig.DEBUG)
-            Log.d(TAG, "startParseTask");
+            Log.d(TAG, "startParse");
 
         // Get the layout for the widget
         RemoteViews views = new
@@ -146,12 +146,12 @@ public class SpecieWidgetUpdate extends Service
         Data.getInstance(null);
     }
 
-    // On progress update
+    // onDateResult
     @Override
-    public void onProgressUpdate(String... dates)
+    public void onDateResult(String then)
     {
         if (BuildConfig.DEBUG)
-            Log.d(TAG, "onProgressUpdate " + dates[0]);
+            Log.d(TAG, "onProgressUpdate " + then);
 
         SimpleDateFormat dateParser =
             new SimpleDateFormat(Main.DATE_FORMAT, Locale.getDefault());
@@ -160,11 +160,11 @@ public class SpecieWidgetUpdate extends Service
         String date = null;
 
         // Format the date for display
-        if (dates[0] != null)
+        if (then != null)
         {
             try
             {
-                Date update = dateParser.parse(dates[0]);
+                Date update = dateParser.parse(then);
                 date = dateFormat.format(update);
             }
 
@@ -185,11 +185,9 @@ public class SpecieWidgetUpdate extends Service
         editor.apply();
     }
 
-    // The system calls this to perform work in the UI thread and
-    // delivers the result from doInBackground()
+    // onDataResult
     @Override
-    @SuppressWarnings("deprecation")
-    public void onPostExecute(Map<String, Double> valueMap)
+    public void onDataResult(Map<String, Double> valueMap)
     {
         if (BuildConfig.DEBUG)
             Log.d(TAG, "onPostExecute " + valueMap);

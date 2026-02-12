@@ -23,13 +23,13 @@ allprojects {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 35
+    compileSdkVersion 34
     namespace "org.billthefarmer.specie"
 
     defaultConfig {
         applicationId "org.billthefarmer.specie"
         minSdkVersion 21
-        targetSdkVersion 35
+        targetSdkVersion 34
         versionName "1.13"
         versionCode 113
 
@@ -46,9 +46,8 @@ android {
     }
 
     lintOptions {
-        disable 'IconDensities', 'IconDuplicates', 'OldTargetApi', 'GradleDependency',
-	    'NonConstantResourceId', 'ExpiredTargetSdkVersion', 'DiscouragedApi',
-	    'AndroidGradlePluginVersion', 'VectorPath'
+        disable 'OldTargetApi', 'NonConstantResourceId', 'AndroidGradlePluginVersion',
+	'GradleDependency', 'DiscouragedApi'
         // abortOnError false
     }
 }
