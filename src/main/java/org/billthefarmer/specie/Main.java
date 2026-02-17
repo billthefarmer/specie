@@ -597,7 +597,8 @@ public class Main extends Activity
 
                 // "Thu, 12 Feb 2026 19:55:17 GMT"
                 DateFormat dateParser = new
-                    SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
+                    SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz",
+                                     Locale.UK);
                 DateFormat dateFormat =
                     DateFormat.getDateInstance(DateFormat.MEDIUM);
 
@@ -1476,7 +1477,8 @@ public class Main extends Activity
     {
         // "Thu, 12 Feb 2026 19:55:17 GMT"
         DateFormat dateParser = new
-            SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
+            SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz",
+                             Locale.UK);
         DateFormat dateFormat =
             DateFormat.getDateInstance(DateFormat.MEDIUM);
 
