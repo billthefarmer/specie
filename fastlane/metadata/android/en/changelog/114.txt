@@ -1,0 +1,2 @@
+ * Update German translation
+ * Update SDK, background tasks
